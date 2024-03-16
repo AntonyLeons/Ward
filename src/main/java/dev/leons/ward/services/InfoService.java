@@ -13,8 +13,10 @@ import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
 import oshi.hardware.HWDiskStore;
+import oshi.hardware.HardwareAbstractionLayer;
 import oshi.hardware.PhysicalMemory;
 import oshi.software.os.OperatingSystem;
+import oshi.hardware.Sensors;
 
 import java.util.Arrays;
 import java.util.List;
@@ -100,8 +102,9 @@ public class InfoService
     {
         ProcessorDto processorDto = new ProcessorDto();
 
-        CentralProcessor centralProcessor = systemInfo.getHardware().getProcessor();
-
+        
+        HardwareAbstractionLayer hardwareAbstractionLayer = systemInfo.getHardware();
+        CentralProcessor centralProcessor = hardwareAbstractionLayer.getProcessor();
         String name = centralProcessor.getProcessorIdentifier().getName();
         if (name.contains("@"))
         {
@@ -115,6 +118,9 @@ public class InfoService
 
         String bitDepthPrefix = centralProcessor.getProcessorIdentifier().isCpu64bit() ? "64" : "32";
         processorDto.setBitDepth(bitDepthPrefix + "-bit");
+        
+        String cpuTemp =  hardwareAbstractionLayer.getSensors().getCpuTemperature() + "°C";
+        processorDto.setTemp(cpuTemp);
 
         return processorDto;
     }

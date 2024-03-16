@@ -32,4 +32,9 @@ public class ProcessorDto
      * Processor architecture field
      */
     private String bitDepth;
+
+    /**
+     * Processor temperature field
+     */
+    private String temp;
 }
