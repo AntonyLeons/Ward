@@ -133,7 +133,7 @@ public class InfoService
         machineDto.setOperatingSystem(osDescription);
 
         long totalRam = globalMemory.getTotal();
-        machineDto.setTotalRam(getConvertedCapacity(totalRam) + " Ram");
+        machineDto.setTotalRam(getConvertedCapacity(totalRam) + " RAM");
 
         Optional<PhysicalMemory> physicalMemoryOptional = globalMemory.getPhysicalMemory().stream().findFirst();
         String ramTypeOrOSBitDepth;
@@ -163,9 +163,6 @@ public class InfoService
         GlobalMemory globalMemory = systemInfo.getHardware().getMemory();
 
     // Retrieve main storage model
-        String mainStorage = hwDiskStores.isEmpty() ? "Undefined" : hwDiskStores.get(0).getModel().replaceAll("\\(.+?\\)", "").trim();
-        storageDto.setMainStorage(mainStorage);
-
         long total = hwDiskStores.stream().mapToLong(HWDiskStore::getSize).sum();
         storageDto.setTotal(getConvertedCapacity(total) + " Total");
 

@@ -5,19 +5,11 @@
  */
 function indexInitialization()
 {
-    logoPage = document.getElementById("logo-page");
-    contactsPage = document.getElementById("contacts-page");
-
     showCards();
 
     currentClockSpeed = document.getElementById("currentClockSpeed");
-    currentProcCount = document.getElementById("currentProcCount");
     currentTotalStorage = document.getElementById("currentTotalStorage");
     currentDiskCount = document.getElementById("currentDiskCount");
-
-    currentPage = 1;
-    firstControl = document.getElementById("first-control");
-    secondControl = document.getElementById("second-control");
 
     cloudLeft = document.getElementById("cloud-left");
     cloudRight = document.getElementById("cloud-right");
@@ -32,9 +24,6 @@ function indexInitialization()
     uptimeXHR = new XMLHttpRequest();
 
     sendUsageRequest();
-
-    firstControl.addEventListener("click", function(event) {changePage(event.target || event.srcElement)});
-    secondControl.addEventListener("click", function(event) {changePage(event.target || event.srcElement)});
 }
 
 /**
@@ -42,8 +31,6 @@ function indexInitialization()
  */
 function showCards()
 {
-    contactsPage.style.visibility = "hidden";
-
     let cards = document.getElementsByClassName("card");
     let versionLabel = document.getElementById("project-version");
 
@@ -117,7 +104,6 @@ function sendInfoRequest()
             let response = JSON.parse(this.response);
 
             currentClockSpeed.innerHTML = response.processor.clockSpeed;
-            currentProcCount.innerHTML = response.machine.procCount;
             currentTotalStorage.innerHTML = response.storage.total;
             currentDiskCount.innerHTML = response.storage.diskCount;
 
@@ -151,52 +137,6 @@ function sendUptimeRequest()
 
     infoXHR.open("GET", "/api/uptime");
     infoXHR.send();
-}
-
-/**
- * Changes page
- *
- * @param {*} control element
- */
-function changePage(element)
-{
-    if ((String(element.id) == "first-control") && (currentPage > 1))
-    {
-        currentPage -= 1;
-        setCloudAnimation(currentPage);
-    }
-    else if ((String(element.id) == "second-control") && (currentPage < 2))
-    {
-        currentPage += 1;
-        setCloudAnimation(currentPage);
-    }
-
-    setPageVisibility(currentPage);
-    setControlOpacity(currentPage);
-}
-
-/**
- * Changes page visibility
- *
- * @param {*} new page
- */
-function setPageVisibility(newPage)
-{
-    switch (newPage)
-    {
-        case 1:
-        {
-            logoPage.style.visibility = "";
-            contactsPage.style.visibility = "hidden";
-            break;
-        }
-        case 2:
-        {
-            logoPage.style.visibility = "hidden";
-            contactsPage.style.visibility = "";
-            break;
-        }
-    }
 }
 
 /**

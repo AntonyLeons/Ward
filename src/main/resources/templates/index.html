@@ -37,11 +37,6 @@
                             </div>
                         </div>
                         <div class = "usage">
-                            <div class = "card-body-squares-grid first">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
                             <div class = "main-hw-info">
                                 <div class = "hw-usage">
                                     <div class = "usage-value">
@@ -56,17 +51,6 @@
                             </div>
                         </div>
                         <div class = "footer first">
-                            <div class = "card-footer-dots-grid">
-                                <div class = "first">
-                                    <div class = "inner-dot"></div>
-                                </div>
-                                <div class = "second">
-                                    <div class = "inner-dot"></div>
-                                </div>
-                                <div class = "third">
-                                    <div class = "inner-dot"></div>
-                                </div>
-                            </div>
                             <div class = "detailed-hw-info">
                                 <div class = "first" th:text = "${info.processor.coreCount}"></div>
                                 <div id = "currentClockSpeed" class = "second" th:text = "${info.processor.clockSpeed}"></div>
@@ -84,16 +68,12 @@
                         <div class = "header">
                             <div class = "hw-logo second"></div>
                             <div class = "label-hw-info">
-                                <div class = "hw-type">Machine</div>
-                                <div class = "hw-name" th:text = "${info.machine.operatingSystem}"></div>
+                                <div class = "hw-type">Memory</div>
+                                <!-- ${info.machine.operatingSystem} -->
+                                <div class = "hw-name" th:text = "${info.machine.totalRam}"></div>
                             </div>
                         </div>
                         <div class = "usage">
-                            <div class = "card-body-squares-grid second">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
                             <div class = "main-hw-info">
                                 <div class = "hw-usage">
                                     <div class = "usage-value">
@@ -103,26 +83,15 @@
                                     </div>
                                     <div class = "usage-postfix">%</div>
                                 </div>
-                                <p class = "info-label">RAM USAGE</p>
+                                <p class = "info-label">MEMORY USAGE</p>
                                 <div class = "usage-underline second"></div>
                             </div>
                         </div>
                         <div class = "footer second">
-                            <div class = "card-footer-dots-grid">
-                                <div class = "first">
-                                    <div class = "inner-dot"></div>
-                                </div>
-                                <div class = "second">
-                                    <div class = "inner-dot"></div>
-                                </div>
-                                <div class = "third">
-                                    <div class = "inner-dot"></div>
-                                </div>
-                            </div>
                             <div class = "detailed-hw-info">
                                 <div class = "first" th:text = "${info.machine.totalRam}"></div>
                                 <div class = "second" th:text = "${info.machine.ramTypeOrOSBitDepth}"></div>
-                                <div id = "currentProcCount" class = "third" th:text = "${info.machine.procCount}"></div>
+                                <div class = "third">Allocated</div>
                             </div>
                             <div class = "dividers">
                                 <div class = "first"></div>
@@ -137,15 +106,10 @@
                             <div class = "hw-logo third"></div>
                             <div class = "label-hw-info">
                                 <div class = "hw-type">Storage</div>
-                                <div class = "hw-name" th:text = "${info.storage.mainStorage}"></div>
+                                <div class = "hw-name" th:text = "${info.storage.total}"></div>
                             </div>
                         </div>
                         <div class = "usage">
-                            <div class = "card-body-squares-grid third">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
                             <div class = "main-hw-info">
                                 <div class = "hw-usage">
                                     <div class = "usage-value">
@@ -160,17 +124,6 @@
                             </div>
                         </div>
                         <div class = "footer third">
-                            <div class = "card-footer-dots-grid">
-                                <div class = "first">
-                                    <div class = "inner-dot"></div>
-                                </div>
-                                <div class = "second">
-                                    <div class = "inner-dot"></div>
-                                </div>
-                                <div class = "third">
-                                    <div class = "inner-dot"></div>
-                                </div>
-                            </div>
                             <div class = "detailed-hw-info">
                                 <div id = "currentTotalStorage" class = "first" th:text = "${info.storage.total}"></div>
                                 <div id = "currentDiskCount" class = "second" th:text = "${info.storage.diskCount}"></div>
@@ -186,42 +139,14 @@
                 <script type = "text/javascript" th:inline = "javascript"> labelsInitialization(); </script>
                 <div class = "col-sm-12 col-md-6 col-lg-6 col-xl-4 sm-hidden">
                     <div class = "card">
-                        <div class = "controls">
-                            <img id = "first-control" class = "first" th:src = @{/img/controls/left.png} />
-                            <img id = "second-control" class = "second" th:src = @{/img/controls/right.png} />
-                        </div>
-                        <div class = "pages">
-                            <div id = "logo-page" class = "first">
-                                <div class = "logo">WARD</div>
-                                <div class = "logo-description">SERVER DASHBOARD</div>
-                            </div>
-                            <div id = "contacts-page" class = "second">
-                                <div class = "contacts-label">CONTACTS</div>
-                                <div class = "contacts-description">
-                                    <div class = "first">Feel free to ask questions and leave feedback</div>
-                                    <div class = "second">You can also text author in Telegram</div>
-                                </div>
-                                <div class = "contacts-links">
-                                    <a href = "https://github.com/AntonyLeons/Ward">
-                                        <img class = "first" th:src = @{/img/links/github.png} />
-                                    </a>
-                                    <a href = "https://t.me/leonsdev">
-                                        <img class = "second" th:src = @{/img/links/telegram.png} />
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                        <div class = "logo">WARD</div>
+                        <div class = "logo-description">SERVER DASHBOARD</div>
                         <div class = "clouds">
                             <img id = "cloud-left" class = "first" th:src = @{/img/logo/clouds/left.png} />
                             <img id = "cloud-right" class = "second" th:src = @{/img/logo/clouds/right.png} />
                         </div>
                         <img class = "background" th:src = @{/img/logo/background.png} />
                         <div class = "uptime">
-                            <div class = "uptime-squares-grid">
-                                <div class = "first"></div>
-                                <div class = "second"></div>
-                                <div class = "third"></div>
-                            </div>
                             <div class = "uptime-rectangle-grid">
                                 <div class = "values-grid">
                                     <div><p id = "uptime-days" th:text = "${uptime.days}"></p></div>
@@ -241,7 +166,7 @@
                 </div>
                 <div class = "col-lg-12 col-xl-8 sm-hidden">
                     <div class = "card">
-                        <div class = "chart-label">% Utilization</div>
+                        <div class = "chart-label">Hardware Utilization (%)</div>
                         <div class = "chart-triangle-grid">
                             <div id = "processor-triangle" class = "first"></div>
                             <div id = "ram-triangle" class = "second"></div>
