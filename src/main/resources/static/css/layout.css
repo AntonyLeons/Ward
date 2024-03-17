@@ -837,3 +837,9 @@ body {
     font-weight: var(--font-weight-regular);
     color: var(--color-advice);
 }
+
+.hardware-icon {
+    width: var(--width-hardware-icon);
+    height: var(--height-hardware-icon);
+    margin: var(--margin-hardware-icon);
+}

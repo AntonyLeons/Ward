@@ -30,7 +30,9 @@
                 <div class = "col-sm-12 col-md-6 col-lg-6 col-xl-4">
                     <div class = "card">
                         <div class = "header">
-                            <div class = "hw-logo first"></div>
+                            <div class = "hw-logo first">
+                                <img class = "hardware-icon" th:src = "@{/img/icons/processor.png}" />
+                            </div>
                             <div class = "label-hw-info">
                                 <div class = "hw-type">Processor</div>
                                 <div class = "hw-name" th:text = "${info.processor.name}"></div>
@@ -66,7 +68,9 @@
                 <div class = "col-sm-12 col-md-6 col-lg-6 col-xl-4">
                     <div class = "card">
                         <div class = "header">
-                            <div class = "hw-logo second"></div>
+                            <div class = "hw-logo second">
+                                <img class = "hardware-icon" th:src = "@{/img/icons/memory.png}" />
+                            </div>
                             <div class = "label-hw-info">
                                 <div class = "hw-type">Memory</div>
                                 <!-- ${info.machine.operatingSystem} -->
@@ -103,10 +107,12 @@
                 <div class = "col-sm-12 col-md-6 col-lg-6 col-xl-4">
                     <div class = "card">
                         <div class = "header">
-                            <div class = "hw-logo third"></div>
+                            <div class = "hw-logo third">
+                                <img class = "hardware-icon" th:src = "@{/img/icons/disk.png}" />
+                            </div>
                             <div class = "label-hw-info">
                                 <div class = "hw-type">Storage</div>
-                                <div class = "hw-name" th:text = "${info.storage.total}"></div>
+                                <div class = "hw-name" th:text = "${info.storage.total}"> Disk Space</div>
                             </div>
                         </div>
                         <div class = "usage">

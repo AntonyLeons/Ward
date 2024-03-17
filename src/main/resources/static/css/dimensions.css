@@ -86,6 +86,9 @@
     --left-title: 1.813rem;
     --left-explanation: 1.813rem;
 
+    /* margin */
+    --margin-hardware-icon: 0.65rem;
+
     /* margin-right */
     --margin-right-form-squares-grid-div: 0.488rem;
     --margin-right-theme-buttons-first: 1.938rem;
@@ -135,6 +138,7 @@
     --height-error: 25.75rem;
     --height-error-img: 19.313rem;
     --height-error-div: 12.125rem;
+    --height-hardware-icon: 2.5rem;
 
     /* max-height */
     --max-height-card: 16.562rem;
@@ -182,6 +186,7 @@
     --width-error-img: 19.313rem;
     --width-error-div: 23.875rem;
     --width-advice: 23.875rem;
+    --width-hardware-icon: 2.5rem;
 
     /* max-width */
     --max-width-setup: 71.25rem;
