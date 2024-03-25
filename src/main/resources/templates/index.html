@@ -73,8 +73,8 @@
                             </div>
                             <div class = "label-hw-info">
                                 <div class = "hw-type">Memory</div>
-                                <!-- ${info.machine.operatingSystem} -->
-                                <div class = "hw-name" th:text = "${info.machine.totalRam}"></div>
+                                <div class = "hw-name" th:text = "${info.machine.operatingSystem}"></div>
+
                             </div>
                         </div>
                         <div class = "usage">
@@ -95,7 +95,7 @@
                             <div class = "detailed-hw-info">
                                 <div class = "first" th:text = "${info.machine.totalRam}"></div>
                                 <div class = "second" th:text = "${info.machine.ramTypeOrOSBitDepth}"></div>
-                                <div class = "third">Allocated</div>
+                                <div id = "currentProcCount" class = "third" th:text = "${info.machine.procCount}"></div>
                             </div>
                             <div class = "dividers">
                                 <div class = "first"></div>
@@ -112,7 +112,7 @@
                             </div>
                             <div class = "label-hw-info">
                                 <div class = "hw-type">Storage</div>
-                                <div class = "hw-name" th:text = "${info.storage.total}"> Disk Space</div>
+                             <div class = "hw-name" th:text = "${info.storage.mainStorage}"></div>
                             </div>
                         </div>
                         <div class = "usage">

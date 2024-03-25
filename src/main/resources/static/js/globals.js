@@ -77,6 +77,11 @@ let currentClockSpeed;
 let ramLabelsArray;
 
 /**
+ * Used to hold value of processes count
+ */
+let currentProcCount;
+
+/**
  * Used to hold values ones of processor usage
  */
 let storageLabelsArray;

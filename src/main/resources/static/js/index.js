@@ -8,6 +8,7 @@ function indexInitialization()
     showCards();
 
     currentClockSpeed = document.getElementById("currentClockSpeed");
+    currentProcCount = document.getElementById("currentProcCount");
     currentTotalStorage = document.getElementById("currentTotalStorage");
     currentDiskCount = document.getElementById("currentDiskCount");
 
@@ -104,6 +105,7 @@ function sendInfoRequest()
             let response = JSON.parse(this.response);
 
             currentClockSpeed.innerHTML = response.processor.clockSpeed;
+            currentProcCount.innerHTML = response.machine.procCount;
             currentTotalStorage.innerHTML = response.storage.total;
             currentDiskCount.innerHTML = response.storage.diskCount;
 

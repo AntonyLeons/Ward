@@ -128,8 +128,7 @@ public class InfoService
         OperatingSystem.OSVersionInfo osVersionInfo = operatingSystem.getVersionInfo();
         GlobalMemory globalMemory = systemInfo.getHardware().getMemory();
 
-        String osDescription = operatingSystem.getFamily() + " " + osVersionInfo.getVersion() + ", "
-                + osVersionInfo.getCodeName();
+        String osDescription = operatingSystem.getFamily() + " " + osVersionInfo.getVersion();
         machineDto.setOperatingSystem(osDescription);
 
         long totalRam = globalMemory.getTotal();
