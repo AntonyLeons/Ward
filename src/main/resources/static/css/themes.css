@@ -19,22 +19,22 @@
 html[theme = "light"]
 {
     /* color */
-    --color-logo: var(--grey-light);
-    --color-logo-description: var(--grey-light);
-    --color-label-main-settings: var(--grey-light);
+    --color-logo: var(--white);
+    --color-logo-description: var(--white);
+    --color-label-main-settings: var(--grey);
     --color-main-settings-input: var(--grey);
-    --color-main-settings-input-placeholder: var(--grey-light);
-    --color-label-additional-settings: var(--grey-light);
+    --color-main-settings-input-placeholder: var(--grey);
+    --color-label-additional-settings: var(--grey);
     --color-theme-buttons-input: var(--grey);
     --color-port: var(--grey);
     --color-port-placeholder: var(--grey-light);
-    --color-submit: var(--grey);
+    --color-submit: var(--white);
     --color-hw-type: var(--black);
     --color-hw-name: var(--grey);
     --color-usage-value-span: var(--grey-light);
     --color-usage-postfix: var(--black);
     --color-info-label: var(--grey-light);
-    --color-detailed-hw-info-div: var(--grey);
+    --color-detailed-hw-info-div: var(--white);
     --color-announcement: var(--white);
     --color-uptime-dashboard-logo: var(--grey-light);
     --color-uptime-dashboard-logo-description: var(--grey-light);
