@@ -162,7 +162,11 @@ public class InfoService
         GlobalMemory globalMemory = systemInfo.getHardware().getMemory();
 
     // Retrieve main storage model
-        long total = hwDiskStores.stream().mapToLong(HWDiskStore::getSize).sum();
+        String mainStorage = hwDiskStores.isEmpty() ? "Undefined"
+            : hwDiskStores.get(0).getModel().replaceAll("\\(.+?\\)", "").trim();
+        storageDto.setMainStorage(mainStorage);
+
+    long total = hwDiskStores.stream().mapToLong(HWDiskStore::getSize).sum();
         storageDto.setTotal(getConvertedCapacity(total) + " Total");
 
         int diskCount = hwDiskStores.size();
