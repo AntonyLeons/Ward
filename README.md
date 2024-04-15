@@ -8,6 +8,8 @@
 
 ---
 
+## [Demo](https://status.leons.dev)
+
 # Quick start
 
 ## Docker
@@ -15,7 +17,15 @@
 * `docker run --restart unless-stopped -it -d --name ward  -p 4000:4000 -e WARD_PORT=4000 -e WARD_THEME=dark --privileged antonyleons/ward`
 * Go to localhost:4000 in web browser
 
-Also see the example [docker-compose.yml](https://github.com/Techeryy/Ward/blob/main/docker-compose.yml) file in the root directory.
+Also see the example [docker-compose.yml](https://github.com/AntonyLeons/Ward/blob/main/docker-compose.yml) file in the root directory.
+
+## Java
+
+Download the latest release from [here](https://github.com/AntonyLeons/Ward/releases/latest)
+
+```console
+java -jar ward.jar
+```
 
 ### About
 
@@ -84,7 +94,6 @@ backgroundColor = #303030
 
 ### Credits
 Original Creator: https://github.com/Rudolf-Barbu/Ward
-Forked Version: https://github.com/AntonyLeons/Ward
 <a href="https://www.flaticon.com/free-icons/control-panel" title="control panel icons">Control panel icons created by Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/processor" title="processor icons">Processor icons created by Those Icons - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/ram" title="ram icons">Ram icons created by srip - Flaticon</a>
