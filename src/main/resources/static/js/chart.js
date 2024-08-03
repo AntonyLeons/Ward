@@ -1,21 +1,20 @@
-"use strict";
 
 /**
  * Initializes labels and datasets
  */
 function chartInitialization()
 {
-    let processorRectangle = document.getElementById("processor-rectangle");
-    let ramRectangle = document.getElementById("ram-rectangle");
-    let storageRectangle = document.getElementById("storage-rectangle");
+    const processorRectangle = document.getElementById("processor-rectangle");
+    const ramRectangle = document.getElementById("ram-rectangle");
+    const storageRectangle = document.getElementById("storage-rectangle");
 
-    let ctx = document.getElementById("chart-body").getContext("2d");
+    const ctx = document.getElementById("chart-body").getContext("2d");
 
     processorTriangle = document.getElementById("processor-triangle");
     ramTriangle = document.getElementById("ram-triangle");
     storageTriangle = document.getElementById("storage-triangle");
 
-    let dataLight =
+    const dataLight =
     {
         data:
         {
@@ -55,7 +54,7 @@ function chartInitialization()
             ]
         }
     }
-    let dataDark =
+    const dataDark =
     {
         data:
         {
@@ -95,7 +94,7 @@ function chartInitialization()
                 ]
         }
     }
-    let options =
+    const options =
     {
         type: "line",
         options:
@@ -150,11 +149,11 @@ function chartInitialization()
         }
     };
 
-    chart = new Chart(ctx, Object.assign((html.getAttribute("theme") == "light") ? dataLight : dataDark, options));
+    chart = new Chart(ctx, Object.assign((html.getAttribute("theme") === "light") ? dataLight : dataDark, options));
 
-    processorRectangle.addEventListener("click", function(event) {hideDataset(event.target || event.srcElement)});
-    ramRectangle.addEventListener("click", function(event) {hideDataset(event.target || event.srcElement)});
-    storageRectangle.addEventListener("click", function(event) {hideDataset(event.target || event.srcElement)});
+    processorRectangle.addEventListener("click", (event) => {hideDataset(event.target || event.srcElement)});
+    ramRectangle.addEventListener("click", (event) => {hideDataset(event.target || event.srcElement)});
+    storageRectangle.addEventListener("click", (event) => {hideDataset(event.target || event.srcElement)});
 }
 
 /**
@@ -165,12 +164,12 @@ function chartInitialization()
  */
 function chartTick(usageData)
 {
-    let datasets = chart.data.datasets;
+    const datasets = chart.data.datasets;
 
     for (let i = 0; i < datasets.length; i++)
     {
-        let dataset = datasets[i].data;
-        let usageDataArray = Object.values(usageData);
+        const dataset = datasets[i].data;
+        const usageDataArray = Object.values(usageData);
 
         for (let k = 0; k < dataset.length - 1; k++)
         {

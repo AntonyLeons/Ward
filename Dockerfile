@@ -1,5 +1,5 @@
 # Base image with maven installed already
-FROM maven:3.9-eclipse-temurin-17 as builder
+FROM maven:3.9-eclipse-temurin-21 as builder
 
 # Copy whole project inside docker
 COPY . .
@@ -9,7 +9,7 @@ RUN mvn clean package
 
 
 # Base image containing OpenJDK 17
-FROM eclipse-temurin:17-jre
+FROM eclipse-temurin:21-jre
 
 # Copy jar and pom from builder image to working directory
 COPY --from=builder target/*.jar /ward.jar
