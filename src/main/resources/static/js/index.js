@@ -1,4 +1,3 @@
-"use strict";
 
 /**
  * Initializes uptime, labels and chart values
@@ -32,18 +31,18 @@ function indexInitialization()
  */
 function showCards()
 {
-    let cards = document.getElementsByClassName("card");
-    let versionLabel = document.getElementById("project-version");
+    const cards = document.getElementsByClassName("card");
+    const versionLabel = document.getElementById("project-version");
 
-    let randomSequenceArray = getRandomSequenceArray();
+    const randomSequenceArray = getRandomSequenceArray();
 
     for (let i = 0; i < cards.length; i++)
     {
-        setTimeout(function()
+        setTimeout(()=> 
         {
             cards[randomSequenceArray[i]].style.opacity = "1";
 
-            if (randomSequenceArray[i] == 4)
+            if (randomSequenceArray[i] === 4)
             {
                 versionLabel.style.opacity = "1";
             }
@@ -56,11 +55,11 @@ function showCards()
  */
 function getRandomSequenceArray()
 {
-    let buffer = [];
+    const buffer = [];
 
     while (buffer.length < 5)
     {
-        let randomNumber = Math.floor(Math.random() * 5);
+        const randomNumber = Math.floor(Math.random() * 5);
 
         if ((buffer.indexOf(randomNumber) === -1))
         {
@@ -78,9 +77,9 @@ function sendUsageRequest()
 {
     usageXHR.onreadystatechange = function()
     {
-        if ((this.readyState == 4) && (this.status == 200))
+        if ((this.readyState === 4) && (this.status === 200))
         {
-            let response = JSON.parse(this.response);
+            const response = JSON.parse(this.response);
 
             labelsTick(response);
             chartTick(response);
@@ -100,9 +99,9 @@ function sendInfoRequest()
 {
     infoXHR.onreadystatechange = function()
     {
-        if ((this.readyState == 4) && (this.status == 200))
+        if ((this.readyState === 4) && (this.status === 200))
         {
-            let response = JSON.parse(this.response);
+            const response = JSON.parse(this.response);
 
             currentClockSpeed.innerHTML = response.processor.clockSpeed;
             currentProcCount.innerHTML = response.machine.procCount;
@@ -124,9 +123,9 @@ function sendUptimeRequest()
 {
     infoXHR.onreadystatechange = function()
     {
-        if ((this.readyState == 4) && (this.status == 200))
+        if ((this.readyState === 4) && (this.status === 200))
         {
-            let response = JSON.parse(this.response);
+            const response = JSON.parse(this.response);
 
             days.innerHTML = response.days;
             hours.innerHTML = response.hours;
