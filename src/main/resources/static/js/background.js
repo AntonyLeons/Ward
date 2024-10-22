@@ -1,14 +1,13 @@
-"use strict";
 
 /**
  * Initializes dynamic background
  */
 function backgroundInitialization()
 {
-if (html.getAttribute("enableFog") == "true")
+if (html.getAttribute("enableFog") === "true")
     {
         background = VANTA.FOG({el: "#background", blurFactor: 0.40, zoom: 1.50});
-        if (html.getAttribute("theme") == "light")
+        if (html.getAttribute("theme") === "light")
         {
             background.setOptions
             ({
@@ -34,9 +33,9 @@ if (html.getAttribute("enableFog") == "true")
         if (background){
             background.destroy();
         }
-        if (html.getAttribute("backgroundColor") == "default" )
+        if (html.getAttribute("backgroundColor") === "default" )
         {
-            document.body.style.backgroundColor = html.getAttribute("theme") == "light" ? "#e5e5e5" : "#292929"
+            document.body.style.backgroundColor = html.getAttribute("theme") === "light" ? "#e5e5e5" : "#292929"
         }
         else
         {

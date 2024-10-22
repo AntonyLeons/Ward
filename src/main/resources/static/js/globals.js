@@ -1,4 +1,3 @@
-"use strict";
 
 /**
  * Used to determine html tag object

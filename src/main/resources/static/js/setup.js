@@ -101,16 +101,16 @@ function sendSetupRequest()
 
     setupXHR.onreadystatechange = function()
     {
-        if (this.readyState == 4)
+        if (this.readyState === 4)
         {
-            if (this.status == 200)
+            if (this.status === 200)
             {
                 submit.value = "LOADING";
-                window.location = "http://" + window.location.hostname + ":" + port.value;
+                window.location = `http://${window.location.hostname}:${port.value}`;
             }
             else
             {
-                let message =
+                const message =
                 {
                     text: "Fill the form correctly",
                     type: ("")
@@ -121,13 +121,13 @@ function sendSetupRequest()
         }
     }
 
-    let data =
+    const data =
     {
-        "serverName": serverName.value,
-        "theme": html.getAttribute("theme"),
-        "port": port.value,
-        "enableFog": String(enableFog.checked),
-        "backgroundColor": backgroundColor.value
+        serverName: serverName.value,
+        theme: html.getAttribute("theme"),
+        port: port.value,
+        enableFog: String(enableFog.checked),
+        backgroundColor: backgroundColor.value
     }
 
         setupXHR.send(JSON.stringify(data));
