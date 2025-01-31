@@ -29,6 +29,7 @@ function chartInitialization()
                     pointBackgroundColor: "rgba(255, 255, 255, 1)",
                     pointHoverBackgroundColor: "rgba(230, 232, 254, 1)",
                     backgroundColor: "rgba(230, 232, 254, 0.3)",
+                    fill:true,
                     data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                 },
                 {
@@ -39,6 +40,7 @@ function chartInitialization()
                     pointBackgroundColor: "rgba(255, 255, 255, 1)",
                     pointHoverBackgroundColor: "rgba(249, 226, 226, 1)",
                     backgroundColor: "rgba(249, 226, 226, 0.3)",
+                    fill:true,
                     data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                 },
                 {
@@ -49,6 +51,7 @@ function chartInitialization()
                     pointBackgroundColor: "rgba(255, 255, 255, 1)",
                     pointHoverBackgroundColor: "rgba(212, 242, 225, 1)",
                     backgroundColor: "rgba(212, 242, 225, 0.3)",
+                    fill:true,
                     data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                 }
             ]
@@ -69,6 +72,7 @@ function chartInitialization()
                         pointBackgroundColor: "rgba(255, 255, 255, 1)",
                         pointHoverBackgroundColor: "rgba(230, 232, 254, 1)",
                         backgroundColor: "rgba(230, 232, 254, 0.3)",
+                        fill:true,
                         data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                     },
                     {
@@ -79,6 +83,7 @@ function chartInitialization()
                         pointBackgroundColor: "rgba(255, 255, 255, 1)",
                         pointHoverBackgroundColor: "rgba(249, 226, 226, 1)",
                         backgroundColor: "rgba(249, 226, 226, 0.3)",
+                        fill:true,
                         data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                     },
                     {
@@ -89,6 +94,7 @@ function chartInitialization()
                         pointBackgroundColor: "rgba(255, 255, 255, 1)",
                         pointHoverBackgroundColor: "rgba(212, 242, 225, 1)",
                         backgroundColor: "rgba(212, 242, 225, 0.3)",
+                        fill:true,
                         data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                     }
                 ]
@@ -99,10 +105,14 @@ function chartInitialization()
         type: "line",
         options:
         {
+            border: { display: false },
             maintainAspectRatio: false,
-            legend:
+            plugins:
             {
-                display: false
+                legend:
+                {
+                    display: false
+                }
             },
             elements:
             {
@@ -113,34 +123,31 @@ function chartInitialization()
             },
             scales:
             {
-                yAxes:
-                [
+                y:
+                {
+                    beginAtZero: true,
+                    suggestedMin: 0,
+                    suggestedMax: 100,
+                    ticks:
                     {
-                        ticks:
-                        {
-                            display: false,
-                            suggestedMin: 0,
-                            suggestedMax: 100
-                        },
-                        gridLines:
-                        {
-                            drawTicks: false
-                        }
-                    }
-                ],
-                xAxes:
-                [
+                        display: false
+                    },
+                    grid:
                     {
-                        ticks:
-                        {
-                            display: false
-                        },
-                        gridLines:
-                        {
-                            drawTicks: false
-                        }
+                        drawTicks: false
                     }
-                ]
+                },
+                x:
+                {
+                    ticks:
+                    {
+                        display: false
+                    },
+                    grid:
+                    {
+                        drawTicks: false
+                    }
+                }
             },
             animation:
             {
