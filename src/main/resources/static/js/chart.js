@@ -29,7 +29,7 @@ function chartInitialization()
                     pointBackgroundColor: "rgba(255, 255, 255, 1)",
                     pointHoverBackgroundColor: "rgba(230, 232, 254, 1)",
                     backgroundColor: "rgba(230, 232, 254, 0.3)",
-                    fill: true,
+                    fill:true,
                     data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                 },
                 {
@@ -105,7 +105,7 @@ function chartInitialization()
         type: "line",
         options:
         {
-            responsive: true,
+            border: { display: false },
             maintainAspectRatio: false,
             plugins:
             {
@@ -126,8 +126,8 @@ function chartInitialization()
                 y:
                 {
                     beginAtZero: true,
-                    min: 0,
-                    max: 100,
+                    suggestedMin: 0,
+                    suggestedMax: 100,
                     ticks:
                     {
                         display: false
@@ -135,10 +135,6 @@ function chartInitialization()
                     grid:
                     {
                         drawTicks: false
-                    },
-                    border:
-                    {
-                        display: false
                     }
                 },
                 x:
@@ -150,17 +146,12 @@ function chartInitialization()
                     grid:
                     {
                         drawTicks: false
-                    },
-                    border:
-                    {
-                        display: false
                     }
                 }
             },
             animation:
             {
-                duration: 150,
-                easing: 'linear'
+                duration: 150
             }
         }
     };
