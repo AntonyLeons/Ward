@@ -752,7 +752,6 @@ body {
     height: var(--height-chart-container);
     width: var(--width-chart-container);
     overflow: hidden;
-    border: var(--border-chart-container) solid var(--grey-light);
 }
 
 #project-version {

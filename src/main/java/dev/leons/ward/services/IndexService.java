@@ -57,7 +57,7 @@ public class IndexService
             properties.load(inputStream);
             String version = properties.getProperty("version");
 
-            return "Ward: v" + version;
+            return "v" + version;
         }
         else
         {

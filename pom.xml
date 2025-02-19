@@ -19,7 +19,7 @@
 
     <!-- project properties -->
     <properties>
-        <oshiVersion>6.6.5</oshiVersion>
+        <oshiVersion>6.6.6</oshiVersion>
         <jnaVersion>5.16.0</jnaVersion>
         <lombokVersion>1.18.36</lombokVersion>
         <ini4jVersion>0.5.4</ini4jVersion>
@@ -42,7 +42,7 @@
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
-            <version>3.1.0</version> 
+            <version>3.1.1</version> 
           </dependency>
         <dependency>
             <groupId>com.github.oshi</groupId>
