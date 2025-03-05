@@ -96,6 +96,11 @@ function setAlertStyle(styleName)
  */
 function sendSetupRequest()
 {
+    // Disable button with delay
+    submit.disabled = true;
+    submit.value = "LAUNCHING...";
+    submit.style.opacity = "0.7";
+
     setupXHR.open("POST", "/api/setup");
     setupXHR.setRequestHeader("Content-Type", "application/json");
 
@@ -105,24 +110,26 @@ function sendSetupRequest()
         {
             if (this.status === 200)
             {
-                submit.value = "LOADING";
-                window.location = `http://${window.location.hostname}:${port.value}`;
+                setTimeout(function() {
+                    window.location = `http://${window.location.hostname}:${port.value}`;
+                }, 2500);
             }
             else
             {
-                const message =
-                {
+                submit.disabled = false;
+                submit.value = "LAUNCH";
+                submit.style.opacity = "1";
+                
+                const message = {
                     text: "Fill the form correctly",
                     type: ("")
                 }
-
                 dhtmlx.message(message);
             }
         }
     }
 
-    const data =
-    {
+    const data = {
         serverName: serverName.value,
         theme: html.getAttribute("theme"),
         port: port.value,
@@ -130,8 +137,7 @@ function sendSetupRequest()
         backgroundColor: backgroundColor.value
     }
 
-        setupXHR.send(JSON.stringify(data));
-
+    setupXHR.send(JSON.stringify(data));
 }
 
 /**
