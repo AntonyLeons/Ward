@@ -2,31 +2,34 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <!-- project options -->
+    
+    <!-- Project Information -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>dev.leons</groupId>
     <artifactId>ward</artifactId>
     <version>2.5.4</version>
     <packaging>jar</packaging>
 
-    <!-- parent pom -->
+    <!-- Parent -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.4.3</version>
-        <relativePath></relativePath>
     </parent>
 
-    <!-- project properties -->
+    <!-- Properties -->
     <properties>
-        <oshiVersion>6.7.0</oshiVersion>
-        <jnaVersion>5.16.0</jnaVersion>
-        <lombokVersion>1.18.36</lombokVersion>
-        <ini4jVersion>0.5.4</ini4jVersion>
+        <java.version>21</java.version>
+        <oshi.version>6.7.0</oshi.version>
+        <jna.version>5.16.0</jna.version>
+        <lombok.version>1.18.36</lombok.version>
+        <ini4j.version>0.5.4</ini4j.version>
+        <jakarta.validation.version>3.1.1</jakarta.validation.version>
     </properties>
 
-    <!-- project dependencies -->
+    <!-- Dependencies -->
     <dependencies>
+        <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -39,46 +42,56 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-        <dependency>
-            <groupId>jakarta.validation</groupId>
-            <artifactId>jakarta.validation-api</artifactId>
-            <version>3.1.1</version> 
-          </dependency>
+
+        <!-- System Monitoring -->
         <dependency>
             <groupId>com.github.oshi</groupId>
             <artifactId>oshi-core</artifactId>
-            <version>${oshiVersion}</version>
+            <version>${oshi.version}</version>
         </dependency>
         <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna</artifactId>
-            <version>${jnaVersion}</version>
+            <version>${jna.version}</version>
         </dependency>
         <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna-platform</artifactId>
-            <version>${jnaVersion}</version>
+            <version>${jna.version}</version>
         </dependency>
+
+        <!-- Utilities -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombokVersion}</version>
+            <version>${lombok.version}</version>
         </dependency>
         <dependency>
             <groupId>org.ini4j</groupId>
             <artifactId>ini4j</artifactId>
-            <version>${ini4jVersion}</version>
+            <version>${ini4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>${jakarta.validation.version}</version>
         </dependency>
     </dependencies>
 
-    <!-- project build plugins -->
+    <!-- Build -->
     <build>
-        <directory>${project.basedir}/target</directory>
-        <outputDirectory>${project.build.directory}/classes</outputDirectory>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
