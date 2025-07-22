@@ -7,8 +7,8 @@ import dev.leons.ward.dto.ProcessorDto;
 import dev.leons.ward.dto.StorageDto;
 import dev.leons.ward.components.UtilitiesComponent;
 import dev.leons.ward.exceptions.ApplicationNotConfiguredException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.noear.solon.annotation.Component;
+import org.noear.solon.annotation.Inject;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
@@ -26,21 +26,21 @@ import java.util.Optional;
  * @author Rudolf Barbu
  * @version 1.0.2
  */
-@Service
+@Component
 public class InfoService
 {
     /**
-     * Autowired SystemInfo object
+     * Injected SystemInfo object
      * Used for getting machine information
      */
-    @Autowired
+    @Inject
     private SystemInfo systemInfo;
 
     /**
-     * Autowired UtilitiesComponent object
+     * Injected UtilitiesComponent object
      * Used for various utility functions
      */
-    @Autowired
+    @Inject
     private UtilitiesComponent utilitiesComponent;
 
     /**

@@ -27,4 +27,16 @@ public class UsageDto
      * Storage usage field
      */
     private int storage;
+
+    public void setProcessor(int processor) {
+        this.processor = processor;
+    }
+
+    public void setRam(int ram) {
+        this.ram = ram;
+    }
+
+    public void setStorage(int storage) {
+        this.storage = storage;
+    }
 }

@@ -2,38 +2,34 @@ package dev.leons.ward.controllers;
 
 import dev.leons.ward.dto.UptimeDto;
 import dev.leons.ward.services.UptimeService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.noear.solon.annotation.Controller;
+import org.noear.solon.annotation.Inject;
+import org.noear.solon.annotation.Mapping;
 
 /**
- * SetupController displays responses from rest API
+ * UptimeController displays responses from rest API
  *
  * @author Rudolf Barbu
  * @version 1.0.0
  */
-@RestController
-@RequestMapping(value = "/api/uptime")
+@Controller
 public class UptimeController
 {
     /**
-     * Autowired UptimeService object
+     * Injected UptimeService object
      * Used for getting uptime information
      */
-    @Autowired
+    @Inject
     private UptimeService uptimeService;
 
     /**
      * Get request to display uptime information
      *
-     * @return ResponseEntity to servlet
+     * @return UptimeDto with uptime information
      */
-    @GetMapping
-    public ResponseEntity<UptimeDto> getUptime()
+    @Mapping("/api/uptime")
+    public UptimeDto getUptime()
     {
-        return new ResponseEntity<>(uptimeService.getUptime(), HttpStatus.OK);
+        return uptimeService.getUptime();
     }
 }

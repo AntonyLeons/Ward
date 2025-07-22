@@ -1,7 +1,7 @@
 package dev.leons.ward.configurations;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.noear.solon.annotation.Bean;
+import org.noear.solon.annotation.Configuration;
 import oshi.SystemInfo;
 
 /**

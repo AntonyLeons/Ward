@@ -32,4 +32,20 @@ public class MachineDto
      * Processes count field
      */
     private String procCount;
+
+    public void setOperatingSystem(String operatingSystem) {
+        this.operatingSystem = operatingSystem;
+    }
+
+    public void setTotalRam(String totalRam) {
+        this.totalRam = totalRam;
+    }
+
+    public void setRamTypeOrOSBitDepth(String ramTypeOrOSBitDepth) {
+        this.ramTypeOrOSBitDepth = ramTypeOrOSBitDepth;
+    }
+
+    public void setProcCount(String procCount) {
+        this.procCount = procCount;
+    }
 }

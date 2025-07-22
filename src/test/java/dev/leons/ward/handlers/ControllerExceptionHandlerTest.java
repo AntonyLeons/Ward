@@ -1,7 +1,6 @@
 package dev.leons.ward.handlers;
 
 import dev.leons.ward.components.UtilitiesComponent;
-import dev.leons.ward.dto.ErrorDto;
 import dev.leons.ward.exceptions.ApplicationAlreadyConfiguredException;
 import dev.leons.ward.exceptions.ApplicationNotConfiguredException;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,12 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.ui.Model;
-import org.springframework.web.HttpRequestMethodNotSupportedException;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.noear.solon.core.handle.ModelAndView;
 
 import java.io.IOException;
 
@@ -29,8 +23,7 @@ public class ControllerExceptionHandlerTest {
     @Mock
     private UtilitiesComponent utilitiesComponent;
 
-    @Mock
-    private Model model;
+
 
     @InjectMocks
     private ControllerExceptionHandler exceptionHandler;
@@ -41,90 +34,54 @@ public class ControllerExceptionHandlerTest {
     }
 
     @Test
-    void testApplicationNotConfiguredExceptionHandler() {
+    void testApplicationNotConfiguredExceptionHandler() throws IOException {
         // Arrange
         ApplicationNotConfiguredException exception = new ApplicationNotConfiguredException();
 
         // Act
-        ResponseEntity<ErrorDto> response = exceptionHandler.applicationNotSetUpExceptionHandler(exception);
+        dev.leons.ward.dto.ErrorDto result = exceptionHandler.handleApplicationConfigurationException(exception);
 
         // Assert
-        assertNotNull(response);
-        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals(exception.getMessage(), response.getBody().getErrMessage());
+        assertNotNull(result);
+        assertEquals(exception.getMessage(), result.getErrMessage());
     }
 
     @Test
-    void testApplicationAlreadyConfiguredExceptionHandler() {
+    void testApplicationAlreadyConfiguredExceptionHandler() throws IOException {
         // Arrange
         ApplicationAlreadyConfiguredException exception = new ApplicationAlreadyConfiguredException();
 
         // Act
-        ResponseEntity<ErrorDto> response = exceptionHandler.applicationNotSetUpExceptionHandler(exception);
+        dev.leons.ward.dto.ErrorDto result = exceptionHandler.handleApplicationConfigurationException(exception);
 
         // Assert
-        assertNotNull(response);
-        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals(exception.getMessage(), response.getBody().getErrMessage());
+        assertNotNull(result);
+        assertEquals(exception.getMessage(), result.getErrMessage());
     }
 
     @Test
-    void testMethodArgumentNotValidExceptionHandler() {
+    void testValidationExceptionHandler() throws IOException {
         // Arrange
-        MethodArgumentNotValidException exception = mock(MethodArgumentNotValidException.class);
-        when(exception.getMessage()).thenReturn("Validation failed");
+        Exception exception = new RuntimeException("Validation failed");
 
         // Act
-        ResponseEntity<ErrorDto> response = exceptionHandler.methodArgumentNotValidExceptionHandler(exception);
+        dev.leons.ward.dto.ErrorDto result = exceptionHandler.handleValidationException(exception);
 
         // Assert
-        assertNotNull(response);
-        assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals(exception.getMessage(), response.getBody().getErrMessage());
+        assertNotNull(result);
+        assertEquals(exception.getMessage(), result.getErrMessage());
     }
 
     @Test
-    void testHttpMessageNotReadableExceptionHandler() {
-        // Arrange
-        HttpMessageNotReadableException exception = mock(HttpMessageNotReadableException.class);
-        when(exception.getMessage()).thenReturn("Message not readable");
-
-        // Act
-        ResponseEntity<ErrorDto> response = exceptionHandler.methodArgumentNotValidExceptionHandler(exception);
-
-        // Assert
-        assertNotNull(response);
-        assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals(exception.getMessage(), response.getBody().getErrMessage());
-    }
-
-    @Test
-    void testExceptionHandlerFor404() throws IOException {
-        // Arrange
-        HttpRequestMethodNotSupportedException exception = mock(HttpRequestMethodNotSupportedException.class);
-
-        // Act
-        String viewName = exceptionHandler.exceptionHandler(exception, model);
-
-        // Assert
-        assertEquals("error/404", viewName);
-        verify(model).addAttribute("theme", "dark");
-    }
-
-    @Test
-    void testExceptionHandlerFor500() throws IOException {
+    void testGeneralExceptionHandler() throws IOException {
         // Arrange
         Exception exception = new RuntimeException("General error");
 
         // Act
-        String viewName = exceptionHandler.exceptionHandler(exception, model);
+        ModelAndView result = exceptionHandler.handleGeneralException(exception);
 
         // Assert
-        assertEquals("error/500", viewName);
-        verify(model).addAttribute("theme", "dark");
+        assertNotNull(result);
+        assertEquals("error/500", result.view());
     }
 }

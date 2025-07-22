@@ -2,7 +2,7 @@ package dev.leons.ward.components;
 
 import dev.leons.ward.Ward;
 import org.ini4j.Ini;
-import org.springframework.stereotype.Component;
+import org.noear.solon.annotation.Component;
 
 import java.io.File;
 import java.io.IOException;

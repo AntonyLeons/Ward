@@ -2,22 +2,20 @@ package dev.leons.ward;
 
 import dev.leons.ward.services.SetupService;
 import lombok.Getter;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.noear.solon.Solon;
+import org.noear.solon.SolonApp;
+import org.noear.solon.annotation.SolonMain;
 
 import java.io.File;
 
 /**
- * Ward is a Spring Boot application class
+ * Ward is a Solon application class
  *
  * @author Rudolf Barbu
  * @version 1.0.4
  */
-@SpringBootApplication
-public class Ward extends SpringBootServletInitializer {
+@SolonMain
+public class Ward {
     /**
      * Constant for determine settings file name
      */
@@ -37,17 +35,19 @@ public class Ward extends SpringBootServletInitializer {
     /**
      * Holder for application context
      */
-    private static ConfigurableApplicationContext configurableApplicationContext;
+    private static SolonApp solonApp;
 
     /**
      * Entry point of Ward application
      *
-     * @param args Spring Boot application arguments
+     * @param args Solon application arguments
      */
     public static void main(final String[] args) {
 
         isFirstLaunch = true;
-        configurableApplicationContext = SpringApplication.run(Ward.class, args);
+        solonApp = Solon.start(Ward.class, args, app -> {
+            app.cfg().loadAdd("server.port=" + INITIAL_PORT);
+        });
 
         File setupFile = new File(Ward.SETUP_FILE_PATH);
 
@@ -63,15 +63,27 @@ public class Ward extends SpringBootServletInitializer {
      */
     public static void restart() {
         isFirstLaunch = false;
-        ApplicationArguments args = configurableApplicationContext.getBean(ApplicationArguments.class);
 
         Thread thread = new Thread(() ->
         {
-            configurableApplicationContext.close();
-            configurableApplicationContext = SpringApplication.run(Ward.class, args.getSourceArgs());
+            if (solonApp != null) {
+                System.exit(0);
+            }
+            solonApp = Solon.start(Ward.class, new String[]{}, app -> {
+                app.cfg().loadAdd("server.port=" + INITIAL_PORT);
+            });
         });
 
         thread.setDaemon(false);
         thread.start();
+    }
+
+    /**
+     * Checks if this is the first launch of the application
+     *
+     * @return true if first launch, false otherwise
+     */
+    public static boolean isFirstLaunch() {
+        return isFirstLaunch;
     }
 }

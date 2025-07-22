@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.noear.solon.Solon;
+import org.noear.solon.SolonApp;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -19,18 +19,18 @@ public class WardTest {
     void testMainMethod() {
         // Arrange
         String[] args = new String[]{"--test"};
-        ConfigurableApplicationContext mockContext = mock(ConfigurableApplicationContext.class);
+        SolonApp mockApp = mock(SolonApp.class);
         
-        try (MockedStatic<SpringApplication> springApplicationMock = mockStatic(SpringApplication.class)) {
-            springApplicationMock.when(() -> SpringApplication.run(eq(Ward.class), any(String[].class)))
-                    .thenReturn(mockContext);
+        try (MockedStatic<Solon> solonMock = mockStatic(Solon.class)) {
+            solonMock.when(() -> Solon.start(eq(Ward.class), any(String[].class), any()))
+                    .thenReturn(mockApp);
             
             // Act
             Ward.main(args);
             
             // Assert
             assertTrue(Ward.isFirstLaunch());
-            springApplicationMock.verify(() -> SpringApplication.run(eq(Ward.class), eq(args)));
+            solonMock.verify(() -> Solon.start(eq(Ward.class), eq(args), any()));
         }
     }
     
@@ -45,11 +45,11 @@ public class WardTest {
     void testIsFirstLaunch() {
         // The main method sets isFirstLaunch to true
         // We can test this by calling main and then checking the value
-        ConfigurableApplicationContext mockContext = mock(ConfigurableApplicationContext.class);
+        SolonApp mockApp = mock(SolonApp.class);
         
-        try (MockedStatic<SpringApplication> springApplicationMock = mockStatic(SpringApplication.class)) {
-            springApplicationMock.when(() -> SpringApplication.run(eq(Ward.class), any(String[].class)))
-                    .thenReturn(mockContext);
+        try (MockedStatic<Solon> solonMock = mockStatic(Solon.class)) {
+            solonMock.when(() -> Solon.start(eq(Ward.class), any(String[].class), any()))
+                    .thenReturn(mockApp);
             
             // Act
             Ward.main(new String[]{});

@@ -4,13 +4,11 @@ import dev.leons.ward.dto.ResponseDto;
 import dev.leons.ward.exceptions.ApplicationAlreadyConfiguredException;
 import dev.leons.ward.services.SetupService;
 import dev.leons.ward.dto.SetupDto;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.noear.solon.annotation.Controller;
+import org.noear.solon.annotation.Inject;
+import org.noear.solon.annotation.Mapping;
+import org.noear.solon.core.handle.Context;
+import org.noear.solon.core.handle.MethodType;
 
 import jakarta.validation.Valid;
 import java.io.IOException;
@@ -21,15 +19,15 @@ import java.io.IOException;
  * @author Rudolf Barbu
  * @version 1.0.1
  */
-@RestController
-@RequestMapping(value = "/api/setup")
+@Controller
+@Mapping("/api/setup")
 public class SetupController
 {
     /**
-     * Autowired SetupService object
+     * Injected SetupService object
      * Used for posting settings information in ini file
      */
-    @Autowired
+    @Inject
     private SetupService setupService;
 
     /**
@@ -38,9 +36,9 @@ public class SetupController
      * @param setupDto dto with data
      * @return ResponseEntity to servlet
      */
-    @PostMapping
-    public ResponseEntity<ResponseDto> postSetup(@RequestBody @Valid final SetupDto setupDto) throws IOException, ApplicationAlreadyConfiguredException
+    @Mapping(method = MethodType.POST)
+    public ResponseDto postSetup(Context ctx, @Valid final SetupDto setupDto) throws IOException, ApplicationAlreadyConfiguredException
     {
-        return new ResponseEntity<>(setupService.postSetup(setupDto), HttpStatus.OK);
+        return setupService.postSetup(setupDto);
     }
 }

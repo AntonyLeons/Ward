@@ -32,4 +32,20 @@ public class UptimeDto
      * Uptime seconds field
      */
     private String seconds;
+
+    public void setDays(String days) {
+        this.days = days;
+    }
+
+    public void setHours(String hours) {
+        this.hours = hours;
+    }
+
+    public void setMinutes(String minutes) {
+        this.minutes = minutes;
+    }
+
+    public void setSeconds(String seconds) {
+        this.seconds = seconds;
+    }
 }

@@ -3,8 +3,8 @@ package dev.leons.ward.services;
 import dev.leons.ward.Ward;
 import dev.leons.ward.dto.UsageDto;
 import dev.leons.ward.exceptions.ApplicationNotConfiguredException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.noear.solon.annotation.Component;
+import org.noear.solon.annotation.Inject;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
@@ -20,14 +20,14 @@ import java.util.Arrays;
  * @author Rudolf Barbu
  * @version 1.0.3
  */
-@Service
+@Component
 public class UsageService
 {
     /**
-     * Autowired SystemInfo object
+     * Injected SystemInfo object
      * Used for getting usage information
      */
-    @Autowired
+    @Inject
     private SystemInfo systemInfo;
 
     /**

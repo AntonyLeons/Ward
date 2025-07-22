@@ -32,4 +32,20 @@ public class StorageDto
      * Total amount of virtual memory (Swap on Linux) field
      */
     private String swapAmount;
+
+    public void setMainStorage(String mainStorage) {
+        this.mainStorage = mainStorage;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
+
+    public void setDiskCount(String diskCount) {
+        this.diskCount = diskCount;
+    }
+
+    public void setSwapAmount(String swapAmount) {
+        this.swapAmount = swapAmount;
+    }
 }

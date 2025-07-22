@@ -2,11 +2,11 @@ package dev.leons.ward.controllers;
 
 import dev.leons.ward.exceptions.ApplicationNotConfiguredException;
 import dev.leons.ward.services.IndexService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.noear.solon.annotation.Controller;
+import org.noear.solon.annotation.Inject;
+import org.noear.solon.annotation.Mapping;
+import org.noear.solon.core.handle.Context;
+import org.noear.solon.core.handle.ModelAndView;
 
 import java.io.IOException;
 
@@ -17,25 +17,24 @@ import java.io.IOException;
  * @version 1.0.2
  */
 @Controller
-@RequestMapping(value = "/")
 public class IndexController
 {
     /**
-     * Autowired IndexService object
+     * Injected IndexService object
      * Used for getting index page template
      */
-    @Autowired
+    @Inject
     private IndexService indexService;
 
     /**
      * Get request to display index page
      *
-     * @param model used for providing values in to html template
-     * @return String name of html template with values from model param
+     * @param ctx Solon context for handling request and response
+     * @return ModelAndView with template and data
      */
-    @GetMapping
-    public String getIndex(final Model model) throws IOException, ApplicationNotConfiguredException
+    @Mapping("/")
+    public ModelAndView getIndex(Context ctx) throws IOException, ApplicationNotConfiguredException
     {
-        return indexService.getIndex(model);
+        return indexService.getIndex(ctx);
     }
 }

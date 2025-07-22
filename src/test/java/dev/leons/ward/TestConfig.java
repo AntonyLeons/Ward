@@ -2,15 +2,14 @@ package dev.leons.ward;
 
 import dev.leons.ward.components.UtilitiesComponent;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
+import org.noear.solon.annotation.Bean;
+import org.noear.solon.annotation.Configuration;
 import oshi.SystemInfo;
 
 /**
  * Test configuration class that provides mock beans for testing
  */
-@TestConfiguration
+@Configuration
 public class TestConfig {
 
     /**
@@ -19,7 +18,6 @@ public class TestConfig {
      * @return mocked SystemInfo instance
      */
     @Bean
-    @Primary
     public SystemInfo systemInfo() {
         return Mockito.mock(SystemInfo.class);
     }
@@ -30,7 +28,6 @@ public class TestConfig {
      * @return mocked UtilitiesComponent instance
      */
     @Bean
-    @Primary
     public UtilitiesComponent utilitiesComponent() {
         return Mockito.mock(UtilitiesComponent.class);
     }

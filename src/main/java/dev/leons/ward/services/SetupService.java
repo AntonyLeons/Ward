@@ -5,7 +5,7 @@ import dev.leons.ward.dto.ResponseDto;
 import dev.leons.ward.dto.SetupDto;
 import dev.leons.ward.exceptions.ApplicationAlreadyConfiguredException;
 import org.ini4j.Ini;
-import org.springframework.stereotype.Service;
+import org.noear.solon.annotation.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import java.io.IOException;
  * @author Rudolf Barbu
  * @version 1.0.2
  */
-@Service
+@Component
 public class SetupService {
     /**
      * Constant, that providing setup section name

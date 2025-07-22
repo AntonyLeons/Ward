@@ -57,4 +57,44 @@ public class SetupDto
     @NotEmpty
     @Pattern(regexp = "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$|default")
     private String backgroundColor;
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    public void setEnableFog(String enableFog) {
+        this.enableFog = enableFog;
+    }
+
+    public void setBackgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    public String getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public String getEnableFog() {
+        return enableFog;
+    }
 }

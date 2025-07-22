@@ -1,0 +1,9 @@
+# Solon application configuration
+solon:
+  view:
+    thymeleaf:
+      prefix: classpath:/templates/
+      suffix: .html
+      mode: HTML
+      encoding: UTF-8
+      cache: true

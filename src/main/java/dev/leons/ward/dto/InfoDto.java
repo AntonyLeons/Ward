@@ -27,4 +27,16 @@ public class InfoDto
      *  Storage info dto field
      */
     private StorageDto storage;
+
+    public void setProcessor(ProcessorDto processor) {
+        this.processor = processor;
+    }
+
+    public void setMachine(MachineDto machine) {
+        this.machine = machine;
+    }
+
+    public void setStorage(StorageDto storage) {
+        this.storage = storage;
+    }
 }

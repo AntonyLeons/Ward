@@ -32,4 +32,20 @@ public class ProcessorDto
      * Processor architecture field
      */
     private String bitDepth;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCoreCount(String coreCount) {
+        this.coreCount = coreCount;
+    }
+
+    public void setClockSpeed(String clockSpeed) {
+        this.clockSpeed = clockSpeed;
+    }
+
+    public void setBitDepth(String bitDepth) {
+        this.bitDepth = bitDepth;
+    }
 }

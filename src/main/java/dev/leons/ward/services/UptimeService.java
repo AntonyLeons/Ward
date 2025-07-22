@@ -1,14 +1,14 @@
 package dev.leons.ward.services;
 
 import dev.leons.ward.dto.UptimeDto;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.noear.solon.annotation.Component;
+import org.noear.solon.annotation.Inject;
 import oshi.SystemInfo;
 
-@Service
+@Component
 public class UptimeService
 {
-    @Autowired
+    @Inject
     private SystemInfo systemInfo;
 
     /**

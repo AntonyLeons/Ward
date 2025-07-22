@@ -2,9 +2,9 @@ package dev.leons.ward.services;
 
 import dev.leons.ward.Ward;
 import dev.leons.ward.components.UtilitiesComponent;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
+import org.noear.solon.annotation.Component;
+import org.noear.solon.annotation.Inject;
+import org.noear.solon.core.handle.ModelAndView;
 
 import java.io.IOException;
 
@@ -14,31 +14,31 @@ import java.io.IOException;
  * @author Rudolf Barbu
  * @version 1.0.1
  */
-@Service
+@Component
 public class ErrorService
 {
     /**
-     * Autowired UtilitiesComponent object
+     * Injected UtilitiesComponent object
      * Used for various utility functions
      */
-    @Autowired
+    @Inject
     private UtilitiesComponent utilitiesComponent;
 
     /**
      * Returns 404 error page
      *
-     * @param model container for strings
-     * @return template name
+     * @return ModelAndView with template and data
      * @throws IOException if ini file is unreachable
      */
-    public String getError(final Model model) throws IOException
+    public ModelAndView getError() throws IOException
     {
         if (Ward.isFirstLaunch())
         {
-            return "setup";
+            return new ModelAndView("setup");
         }
 
-        model.addAttribute("theme", utilitiesComponent.getFromIniFile("theme"));
-        return "error/404";
+        ModelAndView mv = new ModelAndView("error/404");
+        mv.put("theme", utilitiesComponent.getFromIniFile("theme"));
+        return mv;
     }
 }

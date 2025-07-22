@@ -1,11 +1,10 @@
 package dev.leons.ward.controllers;
 
 import dev.leons.ward.services.ErrorService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.noear.solon.annotation.Controller;
+import org.noear.solon.annotation.Inject;
+import org.noear.solon.annotation.Mapping;
+import org.noear.solon.core.handle.ModelAndView;
 
 import java.io.IOException;
 
@@ -16,25 +15,25 @@ import java.io.IOException;
  * @version 1.0.2
  */
 @Controller
-@RequestMapping(value = "/error")
-public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController
+@Mapping("/error")
+public class ErrorController
 {
     /**
-     * Autowired ErrorService object
+     * Injected ErrorService object
      * Used to determine error page
      */
-    @Autowired
+    @Inject
     private ErrorService errorService;
 
     /**
      * Get request to display error page, which corresponds status code
      *
-     * @return String name of html template
+     * @return ModelAndView with template and data
      */
-    @GetMapping
-    public String getError(final Model model) throws IOException
+    @Mapping
+    public ModelAndView getError() throws IOException
     {
-        return errorService.getError(model);
+        return errorService.getError();
     }
 
 }

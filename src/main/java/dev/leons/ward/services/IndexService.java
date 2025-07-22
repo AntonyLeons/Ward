@@ -3,9 +3,10 @@ package dev.leons.ward.services;
 import dev.leons.ward.Ward;
 import dev.leons.ward.components.UtilitiesComponent;
 import dev.leons.ward.exceptions.ApplicationNotConfiguredException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
+import org.noear.solon.annotation.Component;
+import org.noear.solon.annotation.Inject;
+import org.noear.solon.core.handle.Context;
+import org.noear.solon.core.handle.ModelAndView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,28 +18,28 @@ import java.util.Properties;
  * @author Rudolf Barbu
  * @version 1.0.1
  */
-@Service
+@Component
 public class IndexService
 {
     /**
-     * Autowired InfoService object
+     * Injected InfoService object
      * Used for getting machine information for html template
      */
-    @Autowired
+    @Inject
     private InfoService infoService;
 
     /**
-     * Autowired UptimeService object
+     * Injected UptimeService object
      * Used for getting uptime for html template
      */
-    @Autowired
+    @Inject
     private UptimeService uptimeService;
 
     /**
-     * Autowired UtilitiesComponent object
+     * Injected UtilitiesComponent object
      * Used for various utility functions
      */
-    @Autowired
+    @Inject
     private UtilitiesComponent utilitiesComponent;
 
     /**
@@ -68,28 +69,29 @@ public class IndexService
     /**
      * Fills model and returns template name
      *
-     * @param model strings container
-     * @return template name
+     * @param ctx Solon context
+     * @return ModelAndView with template and data
      */
-    public String getIndex(final Model model) throws IOException, ApplicationNotConfiguredException
+    public ModelAndView getIndex(final Context ctx) throws IOException, ApplicationNotConfiguredException
     {
         if (Ward.isFirstLaunch())
         {
-            return "setup";
+            return new ModelAndView("setup.html");
         }
 
         updateDefaultsInSetupFile();
 
-        model.addAttribute("theme", utilitiesComponent.getFromIniFile("theme"));
-        model.addAttribute("serverName", utilitiesComponent.getFromIniFile("serverName"));
-        model.addAttribute("enableFog", utilitiesComponent.getFromIniFile("enableFog"));
-        model.addAttribute("backgroundColor", utilitiesComponent.getFromIniFile("backgroundColor"));
+        ModelAndView mv = new ModelAndView("index");
+        mv.put("theme", utilitiesComponent.getFromIniFile("theme"));
+        mv.put("serverName", utilitiesComponent.getFromIniFile("serverName"));
+        mv.put("enableFog", utilitiesComponent.getFromIniFile("enableFog"));
+        mv.put("backgroundColor", utilitiesComponent.getFromIniFile("backgroundColor"));
 
-        model.addAttribute("info", infoService.getInfo());
-        model.addAttribute("uptime", uptimeService.getUptime());
-        model.addAttribute("version", getVersion());
+        mv.put("info", infoService.getInfo());
+        mv.put("uptime", uptimeService.getUptime());
+        mv.put("version", getVersion());
 
-        return "index";
+        return mv;
     }
 
     private void updateDefaultsInSetupFile() throws IOException {
