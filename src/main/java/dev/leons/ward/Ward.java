@@ -35,6 +35,15 @@ public class Ward extends SpringBootServletInitializer {
     private static boolean isFirstLaunch;
 
     /**
+     * Sets the first launch flag
+     *
+     * @param firstLaunch the first launch flag
+     */
+    public static void setFirstLaunch(boolean firstLaunch) {
+        isFirstLaunch = firstLaunch;
+    }
+
+    /**
      * Holder for application context
      */
     private static ConfigurableApplicationContext configurableApplicationContext;
@@ -54,7 +63,8 @@ public class Ward extends SpringBootServletInitializer {
         if (System.getenv("WARD_NAME") != null || (System.getenv("WARD_THEME") != null) || (System.getenv("WARD_PORT") != null) || (System.getenv("WARD_FOG") != null)) {
             SetupService.envSetup();
         } else if (setupFile.exists()) {
-            restart();
+            // Configuration file exists, mark as not first launch to enable config loading
+            isFirstLaunch = false;
         }
     }
 

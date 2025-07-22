@@ -10,8 +10,9 @@ import java.io.IOException;
 
 /**
  * ServletComponent used for application port changing
+ * Note: Port changes still require application restart due to Spring Boot limitations
  * @author Rudolf Barbu
- * @version 1.0.3
+ * @version 1.0.4
  */
 @Component
 public class ServletComponent implements WebServerFactoryCustomizer<TomcatServletWebServerFactory>
@@ -25,6 +26,7 @@ public class ServletComponent implements WebServerFactoryCustomizer<TomcatServle
 
     /**
      * Customizes port of application
+     * This is called during application startup to set the initial port
      *
      * @param tomcatServletWebServerFactory servlet factory
      */
@@ -35,10 +37,17 @@ public class ServletComponent implements WebServerFactoryCustomizer<TomcatServle
         {
             try
             {
-                tomcatServletWebServerFactory.setPort(Integer.parseInt(utilitiesComponent.getFromIniFile("port")));
+                String portStr = utilitiesComponent.getFromIniFile("port");
+                if (portStr != null) {
+                    tomcatServletWebServerFactory.setPort(Integer.parseInt(portStr));
+                } else {
+                    tomcatServletWebServerFactory.setPort(Ward.INITIAL_PORT);
+                }
             }
-            catch (IOException exception)
+            catch (IOException | NumberFormatException exception)
             {
+                // Fall back to default port if configuration is invalid
+                tomcatServletWebServerFactory.setPort(Ward.INITIAL_PORT);
                 exception.printStackTrace();
             }
         }

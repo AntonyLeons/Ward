@@ -110,9 +110,16 @@ function sendSetupRequest()
         {
             if (this.status === 200)
             {
-                setTimeout(function() {
+                // Check if port changed from default (4000)
+                if (port.value !== '4000') {
+                    // Port changed, app will restart - add small delay
+                    setTimeout(function() {
+                        window.location = `http://${window.location.hostname}:${port.value}`;
+                    }, 2500);
+                } else {
+                    // No port change, no restart needed - redirect immediately
                     window.location = `http://${window.location.hostname}:${port.value}`;
-                }, 2500);
+                }
             }
             else
             {

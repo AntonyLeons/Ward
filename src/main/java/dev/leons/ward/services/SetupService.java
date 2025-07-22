@@ -5,6 +5,7 @@ import dev.leons.ward.dto.ResponseDto;
 import dev.leons.ward.dto.SetupDto;
 import dev.leons.ward.exceptions.ApplicationAlreadyConfiguredException;
 import org.ini4j.Ini;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -22,6 +23,9 @@ public class SetupService {
      * Constant, that providing setup section name
      */
     private static final String SECTION_NAME = "setup";
+
+    @Autowired
+    private ConfigurationService configurationService;
 
     /**
      * Puts new data in ini file
@@ -54,7 +58,18 @@ public class SetupService {
                 putInIniFile(file, "enableFog", setupDto.getEnableFog());
                 putInIniFile(file, "backgroundColor", setupDto.getBackgroundColor());
 
-                Ward.restart();
+                // Mark as no longer first launch to enable configuration loading
+                Ward.setFirstLaunch(false);
+                
+                // Check if port is different from initial port - if so, restart is needed
+                String initialPort = String.valueOf(Ward.INITIAL_PORT);
+                if (!initialPort.equals(setupDto.getPort())) {
+                    // Port changed from default, restart required
+                    Ward.restart();
+                } else {
+                    // Using default port, no restart needed
+                    configurationService.reloadConfiguration();
+                }
             } else {
                 throw new IOException();
             }
@@ -85,6 +100,11 @@ public class SetupService {
                     putInIniFile(file, "enableFog", enableFog);
                     putInIniFile(file, "backgroundColor", backgroundColor);
 
+                    // Mark as no longer first launch to enable configuration loading
+                    Ward.setFirstLaunch(false);
+                    
+                    // Reload configuration without restart
+                    // Note: For environment setup, restart is still needed for port changes
                     Ward.restart();
                 } else {
                     throw new IOException();
