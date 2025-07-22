@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           java-version: '21'
-          distribution: 'temurin'
+          distribution: 'graalvm'
       - run: mvn clean install
       - run: mvn clean package
       - run: mvn -Pnative native:compile
