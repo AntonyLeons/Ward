@@ -15,7 +15,10 @@ jobs:
           distribution: 'temurin'
       - run: mvn clean install
       - run: mvn clean package
+      - run: mvn -Pnative native:compile
       - uses: actions/upload-artifact@v4
         with:
-          name: Ward.jar
-          path: target/*.jar
+          name: Ward-artifacts
+          path: |
+            target/*.jar
+            target/ward
