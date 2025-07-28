@@ -1,7 +1,7 @@
 package dev.leons.ward;
 
 import dev.leons.ward.services.SetupService;
-import lombok.Getter;
+import dev.leons.ward.services.ConfigurationService;
 import org.noear.solon.Solon;
 import org.noear.solon.SolonApp;
 import org.noear.solon.annotation.SolonMain;
@@ -29,7 +29,6 @@ public class Ward {
     /**
      * Holder for determine first launch of application
      */
-    @Getter
     private static boolean isFirstLaunch;
 
     /**
@@ -38,44 +37,52 @@ public class Ward {
     private static SolonApp solonApp;
 
     /**
+     * Configuration service for managing app settings
+     */
+    private static ConfigurationService configurationService;
+
+    /**
      * Entry point of Ward application
      *
      * @param args Solon application arguments
      */
     public static void main(final String[] args) {
-
         isFirstLaunch = true;
-        solonApp = Solon.start(Ward.class, args, app -> {
-            app.cfg().loadAdd("server.port=" + INITIAL_PORT);
-        });
+        String[] modifiedArgs = new String[args.length + 1];
+        System.arraycopy(args, 0, modifiedArgs, 0, args.length);
+        modifiedArgs[args.length] = "--server.port=" + INITIAL_PORT;
+        solonApp = Solon.start(Ward.class, modifiedArgs);
 
+        // Initialize configuration service
+        configurationService = solonApp.context().getBean(ConfigurationService.class);
+        
         File setupFile = new File(Ward.SETUP_FILE_PATH);
 
         if (System.getenv("WARD_NAME") != null || (System.getenv("WARD_THEME") != null) || (System.getenv("WARD_PORT") != null) || (System.getenv("WARD_FOG") != null)) {
             SetupService.envSetup();
         } else if (setupFile.exists()) {
-            restart();
+            // Configuration exists, mark as not first launch
+            isFirstLaunch = false;
+            configurationService.loadConfiguration();
         }
     }
 
     /**
-     * Restarts application
+     * Reloads application configuration without restarting
      */
-    public static void restart() {
+    public static void reloadConfiguration() {
         isFirstLaunch = false;
+        
+        if (configurationService != null) {
+            configurationService.loadConfiguration();
+        }
+    }
 
-        Thread thread = new Thread(() ->
-        {
-            if (solonApp != null) {
-                System.exit(0);
-            }
-            solonApp = Solon.start(Ward.class, new String[]{}, app -> {
-                app.cfg().loadAdd("server.port=" + INITIAL_PORT);
-            });
-        });
-
-        thread.setDaemon(false);
-        thread.start();
+    /**
+     * Gets the configuration service instance
+     */
+    public static ConfigurationService getConfigurationService() {
+        return configurationService;
     }
 
     /**
@@ -85,5 +92,12 @@ public class Ward {
      */
     public static boolean isFirstLaunch() {
         return isFirstLaunch;
+    }
+
+    /**
+     * Sets the first launch flag
+     */
+    public static void setFirstLaunch(boolean firstLaunch) {
+        isFirstLaunch = firstLaunch;
     }
 }

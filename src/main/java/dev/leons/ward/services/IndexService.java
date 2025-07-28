@@ -8,6 +8,7 @@ import org.noear.solon.annotation.Inject;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -74,6 +75,13 @@ public class IndexService
      */
     public ModelAndView getIndex(final Context ctx) throws IOException, ApplicationNotConfiguredException
     {
+        // Check if setup file exists but we're still in first launch mode
+        File setupFile = new File(Ward.SETUP_FILE_PATH);
+        if (Ward.isFirstLaunch() && setupFile.exists()) {
+            // Configuration exists but wasn't loaded, reload it
+            Ward.reloadConfiguration();
+        }
+        
         if (Ward.isFirstLaunch())
         {
             return new ModelAndView("setup.html");
@@ -81,7 +89,7 @@ public class IndexService
 
         updateDefaultsInSetupFile();
 
-        ModelAndView mv = new ModelAndView("index");
+        ModelAndView mv = new ModelAndView("index.html");
         mv.put("theme", utilitiesComponent.getFromIniFile("theme"));
         mv.put("serverName", utilitiesComponent.getFromIniFile("serverName"));
         mv.put("enableFog", utilitiesComponent.getFromIniFile("enableFog"));

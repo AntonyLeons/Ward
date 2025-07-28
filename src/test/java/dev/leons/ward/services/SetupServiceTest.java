@@ -35,7 +35,7 @@ public class SetupServiceTest {
         // Mock the static methods of Ward class
         wardMockedStatic = mockStatic(Ward.class);
         wardMockedStatic.when(Ward::isFirstLaunch).thenReturn(true);
-        wardMockedStatic.when(Ward::restart).then(invocation -> null);
+        wardMockedStatic.when(Ward::reloadConfiguration).then(invocation -> null);
     }
     
     @AfterEach
@@ -70,8 +70,8 @@ public class SetupServiceTest {
             assertNotNull(response);
             assertEquals("Settings saved correctly", response.getMessage());
             
-            // Verify that Ward.restart() was called
-            wardMockedStatic.verify(Ward::restart);
+            // Verify that Ward.reloadConfiguration() was called
+            wardMockedStatic.verify(Ward::reloadConfiguration);
             
             // Verify the file was created and contains expected values
             assertTrue(setupFile.exists());
@@ -100,8 +100,8 @@ public class SetupServiceTest {
             // Act & Assert
             assertThrows(IOException.class, () -> setupService.postSetup(setupDto));
             
-            // Verify that Ward.restart() was not called
-            wardMockedStatic.verify(Ward::restart, never());
+            // Verify that Ward.reloadConfiguration() was not called
+            wardMockedStatic.verify(Ward::reloadConfiguration, never());
         } finally {
             // Clean up
             if (setupFile.exists()) {
@@ -136,8 +136,8 @@ public class SetupServiceTest {
             assertNotNull(response);
             assertEquals("Settings saved correctly", response.getMessage());
             
-            // Verify that Ward.restart() was called
-            wardMockedStatic.verify(Ward::restart);
+            // Verify that Ward.reloadConfiguration() was called
+            wardMockedStatic.verify(Ward::reloadConfiguration);
             
             // Verify the file was created and contains expected default values
             assertTrue(setupFile.exists());

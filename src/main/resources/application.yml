@@ -1,4 +1,7 @@
 # Solon application configuration
+server:
+  port: 4000
+
 solon:
   view:
     thymeleaf:

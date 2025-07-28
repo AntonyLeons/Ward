@@ -54,7 +54,7 @@ public class SetupService {
                 putInIniFile(file, "enableFog", setupDto.getEnableFog());
                 putInIniFile(file, "backgroundColor", setupDto.getBackgroundColor());
 
-                Ward.restart();
+                Ward.reloadConfiguration();
             } else {
                 throw new IOException();
             }
@@ -85,7 +85,7 @@ public class SetupService {
                     putInIniFile(file, "enableFog", enableFog);
                     putInIniFile(file, "backgroundColor", backgroundColor);
 
-                    Ward.restart();
+                    Ward.reloadConfiguration();
                 } else {
                     throw new IOException();
                 }
