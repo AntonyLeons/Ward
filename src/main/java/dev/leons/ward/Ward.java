@@ -2,6 +2,7 @@ package dev.leons.ward;
 
 import dev.leons.ward.services.SetupService;
 import dev.leons.ward.services.ConfigurationService;
+import dev.leons.ward.services.PerformanceService;
 import org.noear.solon.Solon;
 import org.noear.solon.SolonApp;
 import org.noear.solon.annotation.SolonMain;
@@ -47,6 +48,9 @@ public class Ward {
      * @param args Solon application arguments
      */
     public static void main(final String[] args) {
+        // Record startup time at the very beginning
+        PerformanceService.recordStartTime();
+        
         isFirstLaunch = true;
         String[] modifiedArgs = new String[args.length + 1];
         System.arraycopy(args, 0, modifiedArgs, 0, args.length);
@@ -64,6 +68,17 @@ public class Ward {
             // Configuration exists, mark as not first launch
             isFirstLaunch = false;
             configurationService.loadConfiguration();
+        }
+        
+        // Record when application is fully ready
+        PerformanceService.recordReadyTime();
+        
+        // Get performance service and log startup summary
+        try {
+            PerformanceService performanceService = solonApp.context().getBean(PerformanceService.class);
+            System.out.println(performanceService.getPerformanceSummary());
+        } catch (Exception e) {
+            System.out.println("Ward application started successfully");
         }
     }
 
