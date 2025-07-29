@@ -1,5 +1,6 @@
 package dev.leons.ward;
 
+import dev.leons.ward.services.PerformanceService;
 import dev.leons.ward.services.SetupService;
 import lombok.Getter;
 import org.springframework.boot.ApplicationArguments;
@@ -45,9 +46,25 @@ public class Ward extends SpringBootServletInitializer {
      * @param args Spring Boot application arguments
      */
     public static void main(final String[] args) {
+        // Record startup start time (safe for testing)
+        try {
+            PerformanceService.recordStartupStart();
+        } catch (Exception e) {
+            // Performance monitoring not available during testing - continue normally
+        }
 
         isFirstLaunch = true;
         configurableApplicationContext = SpringApplication.run(Ward.class, args);
+
+        // Record startup completion and display performance summary (safe for testing)
+        try {
+            PerformanceService performanceService = configurableApplicationContext.getBean(PerformanceService.class);
+            if (performanceService != null) {
+                performanceService.recordStartupComplete();
+            }
+        } catch (Exception e) {
+            // Performance monitoring not available during testing - continue normally
+        }
 
         File setupFile = new File(Ward.SETUP_FILE_PATH);
 
