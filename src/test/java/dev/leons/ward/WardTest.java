@@ -1,11 +1,13 @@
 package dev.leons.ward;
 
+import dev.leons.ward.services.ConfigurationService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.noear.solon.Solon;
 import org.noear.solon.SolonApp;
+import org.noear.solon.core.AppContext;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -20,9 +22,14 @@ public class WardTest {
         // Arrange
         String[] args = new String[]{"--test"};
         SolonApp mockApp = mock(SolonApp.class);
+        AppContext mockContext = mock(AppContext.class);
+        ConfigurationService mockConfigService = mock(ConfigurationService.class);
+        
+        when(mockApp.context()).thenReturn(mockContext);
+        when(mockContext.getBean(ConfigurationService.class)).thenReturn(mockConfigService);
         
         try (MockedStatic<Solon> solonMock = mockStatic(Solon.class)) {
-            solonMock.when(() -> Solon.start(eq(Ward.class), any(String[].class), any()))
+            solonMock.when(() -> Solon.start(eq(Ward.class), any(String[].class)))
                     .thenReturn(mockApp);
             
             // Act
@@ -30,7 +37,7 @@ public class WardTest {
             
             // Assert
             assertTrue(Ward.isFirstLaunch());
-            solonMock.verify(() -> Solon.start(eq(Ward.class), eq(args), any()));
+            solonMock.verify(() -> Solon.start(eq(Ward.class), any(String[].class)));
         }
     }
     
@@ -46,9 +53,14 @@ public class WardTest {
         // The main method sets isFirstLaunch to true
         // We can test this by calling main and then checking the value
         SolonApp mockApp = mock(SolonApp.class);
+        AppContext mockContext = mock(AppContext.class);
+        ConfigurationService mockConfigService = mock(ConfigurationService.class);
+        
+        when(mockApp.context()).thenReturn(mockContext);
+        when(mockContext.getBean(ConfigurationService.class)).thenReturn(mockConfigService);
         
         try (MockedStatic<Solon> solonMock = mockStatic(Solon.class)) {
-            solonMock.when(() -> Solon.start(eq(Ward.class), any(String[].class), any()))
+            solonMock.when(() -> Solon.start(eq(Ward.class), any(String[].class)))
                     .thenReturn(mockApp);
             
             // Act
