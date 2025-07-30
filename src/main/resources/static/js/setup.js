@@ -5,7 +5,6 @@
  */
 function setupInitialization()
 {
-    setAlertStyle("light");
 
     let lightTheme = document.getElementById("light-theme");
     let darkTheme = document.getElementById("dark-theme");
@@ -36,7 +35,6 @@ function changeTheme(element)
     if (String(element.id) == "light-theme")
     {
         html.setAttribute("theme", "light");
-        setAlertStyle("light");
 
         lightThemeSquare.style.animation = "fade-in-square 0.5s forwards";
         darkThemeSquare.style.animation = "fade-out-square 0.5s forwards";
@@ -52,7 +50,6 @@ function changeTheme(element)
     else
     {
         html.setAttribute("theme", "dark");
-        setAlertStyle("dark");
 
         darkThemeSquare.style.visibility = "visible";
 
@@ -73,23 +70,7 @@ function changeTheme(element)
     document.body.style.backgroundColor = color;
 }
 
-/**
- * Changes alert style
- *
- * @param {*} style name
- */
-function setAlertStyle(styleName)
-{
-    let links = document.getElementsByTagName("link");
 
-    for (let i = 0; i < links.length; i++)
-    {
-        if ((links[i].getAttribute("title") == "light") || (links[i].getAttribute("title") == "dark"))
-        {
-            links[i].disabled = (links[i].getAttribute("title") != styleName);
-        }
-    }
-}
 
 /**
  * Sends settings request
@@ -120,11 +101,16 @@ function sendSetupRequest()
                 submit.value = "LAUNCH";
                 submit.style.opacity = "1";
                 
-                const message = {
-                    text: "Fill the form correctly",
-                    type: ("")
-                }
-                dhtmlx.message(message);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Fill the form correctly',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
             }
         }
     }
