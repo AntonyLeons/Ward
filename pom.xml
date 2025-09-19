@@ -20,7 +20,7 @@
     <!-- Properties -->
     <properties>
         <java.version>21</java.version>
-        <oshi.version>6.8.3</oshi.version>
+        <oshi.version>6.9.0</oshi.version>
         <jna.version>5.17.0</jna.version>
         <lombok.version>1.18.40</lombok.version>
         <ini4j.version>0.5.4</ini4j.version>
