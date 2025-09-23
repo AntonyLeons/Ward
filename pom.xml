@@ -21,7 +21,7 @@
     <properties>
         <java.version>21</java.version>
         <oshi.version>6.8.3</oshi.version>
-        <jna.version>5.17.0</jna.version>
+        <jna.version>5.18.0</jna.version>
         <lombok.version>1.18.40</lombok.version>
         <ini4j.version>0.5.4</ini4j.version>
         <jakarta.validation.version>3.1.1</jakarta.validation.version>
