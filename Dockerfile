@@ -5,7 +5,7 @@ FROM maven:3.9-eclipse-temurin-25 AS builder
 COPY . .
 
 # Build project
-RUN mvn clean package
+RUN mvn clean package -B -Dmaven.wagon.http.retryHandler.count=3 -Dmaven.wagon.http.pool=false
 
 # Base image containing OpenJDK 25
 FROM eclipse-temurin:25-jre
