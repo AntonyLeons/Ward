@@ -14,17 +14,17 @@ import lombok.Setter;
 public class InfoDto
 {
     /**
-     *  Processor info dto field
+     * Processor info field
      */
     private ProcessorDto processor;
 
     /**
-     *  machine info dto field
+     * Machine info field
      */
     private MachineDto machine;
 
     /**
-     *  Storage info dto field
+     * Storage info field
      */
     private StorageDto storage;
 }

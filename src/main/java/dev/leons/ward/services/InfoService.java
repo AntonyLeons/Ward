@@ -9,7 +9,7 @@ import dev.leons.ward.components.UtilitiesComponent;
 import dev.leons.ward.exceptions.ApplicationNotConfiguredException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import oshi.SystemInfo;
+import oshi.SystemInfoFFM;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
 import oshi.hardware.HWDiskStore;
@@ -34,7 +34,7 @@ public class InfoService
      * Used for getting machine information
      */
     @Autowired
-    private SystemInfo systemInfo;
+    private SystemInfoFFM systemInfo;
 
     /**
      * Autowired UtilitiesComponent object

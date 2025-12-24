@@ -15,7 +15,7 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import oshi.SystemInfo;
+import oshi.SystemInfoFFM;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
 import oshi.hardware.HWDiskStore;
@@ -36,7 +36,7 @@ public class InfoServiceTest {
     private MockedStatic<Ward> mockedWard;
 
     @Mock
-    private SystemInfo systemInfo;
+    private SystemInfoFFM systemInfo;
 
     @Mock
     private UtilitiesComponent utilitiesComponent;
