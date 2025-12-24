@@ -21,4 +21,4 @@ EXPOSE 4000
 ENV SPRING_PROFILES_ACTIVE=prod
 
 # Run the JAR file as sudo user on entry point
-ENTRYPOINT ["java", "--enable-native-access=ALL-UNNAMED", "-XX:MaxRAMPercentage=75.0", "-XX:+UseSerialGC", "-jar", "ward.jar"]
+ENTRYPOINT ["java", "-jar", "ward.jar"]
