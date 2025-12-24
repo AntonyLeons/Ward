@@ -17,5 +17,8 @@ COPY --from=builder pom.xml /pom.xml
 # Expose port 4000
 EXPOSE 4000
 
+# Set production profile
+ENV SPRING_PROFILES_ACTIVE=prod
+
 # Run the JAR file as sudo user on entry point
-ENTRYPOINT ["java", "-jar", "ward.jar"]
+ENTRYPOINT ["java", "--enable-native-access=ALL-UNNAMED", "-XX:MaxRAMPercentage=75.0", "-XX:+UseSerialGC", "-jar", "ward.jar"]
