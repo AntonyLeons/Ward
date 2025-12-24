@@ -1,11 +1,20 @@
 # Base image with Maven installed already
 FROM maven:3.9-eclipse-temurin-25 AS builder
 
+RUN apt-get update && \
+    apt-get install -y ca-certificates && \
+    update-ca-certificates
+
+
+ENV MAVEN_OPTS="-Djava.net.preferIPv4Stack=true \
+                -Dmaven.wagon.http.pool=false \
+                -Dmaven.wagon.http.retryHandler.count=3 \
+                -Dhttps.protocols=TLSv1.2"
 # Copy the entire project into the Docker image
 COPY . .
 
 # Build project
-RUN mvn clean package -B -Dmaven.wagon.http.retryHandler.count=3 -Dmaven.wagon.http.pool=false
+RUN mvn clean package
 
 # Base image containing OpenJDK 25
 FROM eclipse-temurin:25-jre
