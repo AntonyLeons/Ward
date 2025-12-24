@@ -17,7 +17,7 @@ import java.io.IOException;
  */
 @Controller
 @RequestMapping(value = "/error")
-public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController
+public class ErrorController implements org.springframework.boot.webmvc.error.ErrorController
 {
     /**
      * Autowired ErrorService object

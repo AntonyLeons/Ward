@@ -3,13 +3,13 @@ package dev.leons.ward.services;
 import dev.leons.ward.dto.UptimeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import oshi.SystemInfo;
+import oshi.SystemInfoFFM;
 
 @Service
 public class UptimeService
 {
     @Autowired
-    private SystemInfo systemInfo;
+    private SystemInfoFFM systemInfo;
 
     /**
      * Gets uptime information

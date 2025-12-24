@@ -5,7 +5,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
-import oshi.SystemInfo;
+import oshi.SystemInfoFFM;
 
 /**
  * Test configuration class that provides mock beans for testing
@@ -20,8 +20,8 @@ public class TestConfig {
      */
     @Bean
     @Primary
-    public SystemInfo systemInfo() {
-        return Mockito.mock(SystemInfo.class);
+    public SystemInfoFFM systemInfo() {
+        return Mockito.mock(SystemInfoFFM.class);
     }
     
     /**

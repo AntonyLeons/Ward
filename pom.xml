@@ -7,21 +7,20 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>dev.leons</groupId>
     <artifactId>ward</artifactId>
-    <version>2.5.5</version>
+    <version>2.6.0</version>
     <packaging>jar</packaging>
 
     <!-- Parent -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.6</version>
+        <version>4.0.1</version>
     </parent>
 
     <!-- Properties -->
     <properties>
-        <java.version>21</java.version>
+        <java.version>25</java.version>
         <oshi.version>6.9.2</oshi.version>
-        <jna.version>5.18.1</jna.version>
         <lombok.version>1.18.42</lombok.version>
         <ini4j.version>0.5.4</ini4j.version>
         <jakarta.validation.version>3.1.1</jakarta.validation.version>
@@ -46,18 +45,8 @@
         <!-- System Monitoring -->
         <dependency>
             <groupId>com.github.oshi</groupId>
-            <artifactId>oshi-core</artifactId>
+            <artifactId>oshi-core-java25</artifactId>
             <version>${oshi.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.java.dev.jna</groupId>
-            <artifactId>jna</artifactId>
-            <version>${jna.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.java.dev.jna</groupId>
-            <artifactId>jna-platform</artifactId>
-            <version>${jna.version}</version>
         </dependency>
 
         <!-- Utilities -->
@@ -108,6 +97,20 @@
     <!-- Build -->
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <release>${java.version}</release>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
