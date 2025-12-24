@@ -21,7 +21,6 @@
     <properties>
         <java.version>25</java.version>
         <oshi.version>6.9.2</oshi.version>
-        <jna.version>5.18.1</jna.version>
         <lombok.version>1.18.42</lombok.version>
         <ini4j.version>0.5.4</ini4j.version>
         <jakarta.validation.version>3.1.1</jakarta.validation.version>
@@ -48,16 +47,6 @@
             <groupId>com.github.oshi</groupId>
             <artifactId>oshi-core-java25</artifactId>
             <version>${oshi.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.java.dev.jna</groupId>
-            <artifactId>jna</artifactId>
-            <version>${jna.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.java.dev.jna</groupId>
-            <artifactId>jna-platform</artifactId>
-            <version>${jna.version}</version>
         </dependency>
 
         <!-- Utilities -->
