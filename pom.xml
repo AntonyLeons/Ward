@@ -19,7 +19,7 @@
 
     <!-- Properties -->
     <properties>
-        <java.version>21</java.version>
+        <java.version>25</java.version>
         <oshi.version>6.9.2</oshi.version>
         <jna.version>5.18.1</jna.version>
         <lombok.version>1.18.42</lombok.version>
@@ -46,7 +46,7 @@
         <!-- System Monitoring -->
         <dependency>
             <groupId>com.github.oshi</groupId>
-            <artifactId>oshi-core</artifactId>
+            <artifactId>oshi-core-java25</artifactId>
             <version>${oshi.version}</version>
         </dependency>
         <dependency>
@@ -108,6 +108,20 @@
     <!-- Build -->
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <release>25</release>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

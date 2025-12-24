@@ -2,7 +2,7 @@ package dev.leons.ward.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import oshi.SystemInfo;
+import oshi.SystemInfoFFM;
 
 /**
  * BeanConfiguration provides bean configuration for classes, which are not components
@@ -17,8 +17,8 @@ public class BeanConfiguration
      * @return SystemInfo object
      */
     @Bean
-    public SystemInfo systemInfo()
+    public SystemInfoFFM systemInfo()
     {
-        return new SystemInfo();
+        return new SystemInfoFFM();
     }
 }

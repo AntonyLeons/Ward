@@ -5,7 +5,7 @@ import dev.leons.ward.dto.UsageDto;
 import dev.leons.ward.exceptions.ApplicationNotConfiguredException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import oshi.SystemInfo;
+import oshi.SystemInfoFFM;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
 import oshi.software.os.FileSystem;
@@ -28,7 +28,7 @@ public class UsageService
      * Used for getting usage information
      */
     @Autowired
-    private SystemInfo systemInfo;
+    private SystemInfoFFM systemInfo;
 
     /**
      * Gets processor usage
