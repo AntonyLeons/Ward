@@ -6,8 +6,7 @@ use axum::{
     routing::{get, post},
     Router, Json, extract::State, response::Html,
 };
-use axum::http::{header, StatusCode, Uri, HeaderValue};
-use axum::response::IntoResponse;
+use axum::http::{header, HeaderValue};
 use std::sync::Arc;
 use tokio::sync::Mutex;
 use tower_http::services::ServeDir;

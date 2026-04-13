@@ -19,19 +19,19 @@
 
 Also see the example [docker-compose.yml](https://github.com/AntonyLeons/Ward/blob/main/docker-compose.yml) file in the root directory.
 
-## Java
+## Rust
 
 Download the latest release from [here](https://github.com/AntonyLeons/Ward/releases/latest)
 
 ```console
-java -jar ward.jar
+./ward
 ```
 
 ### About
 
 Ward is a simple and minimalistic server monitoring tool. Ward supports adaptive design system. Also, it supports dark theme.
 It shows only principal information and can be used, if you want to see nice looking dashboard instead looking on bunch of numbers and graphs.
-Ward works nice on all popular operating systems, because it uses [OSHI](https://github.com/oshi/oshi).
+Ward works nice on all popular operating systems, because it uses [sysinfo](https://github.com/GuillaumeGomez/sysinfo).
 
 **All features tested on:** `Windows` `Linux`
 
@@ -44,18 +44,18 @@ Ward works nice on all popular operating systems, because it uses [OSHI](https:/
 
 ### Installation
 
-    Create your own jar
+    Build from source
 
     • Clone the project
-    • Import project in your IDE as Maven project
-    • mvn clean package
+    • Install Rust
+    • cargo build --release
 
 <br>
 
-    Run jar file
+    Run binary
 
-    1. Create you own jar as described above
-    2. Execute jar on Windows or Linux with administrative rights
+    1. Build the binary as described above
+    2. Execute the binary in target/release/ward
     3. Enter localhost:4000 and set up application
 
 <br>
