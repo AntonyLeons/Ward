@@ -67,7 +67,7 @@
                         </div>
                         <label class = "label-additional-settings"><span>ENABLE BACKGROUND FOG</span><input id = "fog-toggle" class = "fog-toggle" type = "checkbox" name = "enableFog" checked></label>
                         <label class = "label-additional-settings" title="Disable Fog to select"><span>SELECT BACKGROUND COLOR</span><input id = "color-selector" class = "color-selector" type = "color" value="#e5e5e5" disabled></label>
-                        <input id = "port" class = "port" type = "text" maxlength = "5" placeholder = "Application Port" />
+                        <input id = "port" class = "port" type = "text" maxlength = "5" placeholder = "Application Port" value="{{ port }}" {% if port_overridden %}disabled title="Port is overridden by command-line flag or environment variable" style="opacity: 0.5;"{% endif %} />
                     </div>
                     <input id = "submit" class = "submit" type = "button" value = "LAUNCH" />
                 </div>

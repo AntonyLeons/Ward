@@ -18,18 +18,60 @@ use crate::models::{SetupDto, ResponseDto, UsageDto, InfoDto, UptimeDto};
 struct AppState {
     sys_monitor: Arc<Mutex<SystemMonitor>>,
     config_manager: Arc<ConfigManager>,
+    active_port: String,
+    port_overridden: bool,
+}
+
+
+use clap::Parser;
+
+
+
+#[derive(Parser, Debug)]
+#[command(author, version, about = "Ward dashboard rewrite in Rust", long_about = None)]
+struct Args {
+    /// Port to run the server on (1024-65535)
+    #[arg(short, long, value_parser = port_in_range)]
+    port: Option<u16>,
+}
+
+fn port_in_range(s: &str) -> Result<u16, String> {
+    let port: usize = s
+        .parse()
+        .map_err(|_| format!("`{}` isn't a valid port number", s))?;
+    if (1024..=65535).contains(&port) {
+        Ok(port as u16)
+    } else {
+        Err(format!("Port not in range 1024-65535 (provided {})", port))
+    }
 }
 
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt::init();
 
+    let args = Args::parse();
+
     let sys_monitor = Arc::new(Mutex::new(SystemMonitor::new()));
     let config_manager = Arc::new(ConfigManager::new("setup.ini"));
+
+    let port_from_cli = args.port;
+    let port_from_env = std::env::var("WARD_PORT").ok().and_then(|p| p.parse::<u16>().ok());
+
+    let port_overridden = port_from_cli.is_some() || port_from_env.is_some();
+
+    let port = port_from_cli.or(port_from_env).unwrap_or_else(|| {
+        config_manager
+            .read_config()
+            .and_then(|c| c.port.parse().ok())
+            .unwrap_or(4000)
+    });
 
     let app_state = Arc::new(AppState {
         sys_monitor,
         config_manager: config_manager.clone(),
+        active_port: port.to_string(),
+        port_overridden,
     });
 
     let app = Router::new()
@@ -43,13 +85,6 @@ async fn main() {
         .nest_service("/img", ServeDir::new("assets/img"))
         .nest_service("/fonts", ServeDir::new("assets/fonts"))
         .with_state(app_state);
-
-    let port = std::env::var("WARD_PORT").unwrap_or_else(|_| {
-        config_manager
-            .read_config()
-            .map(|c| c.port)
-            .unwrap_or_else(|| "4000".to_string())
-    });
 
     let addr = format!("0.0.0.0:{}", port);
     tracing::info!("Listening on {}", addr);
@@ -82,6 +117,10 @@ struct SetupTemplate {
     background_color: String,
     #[allow(dead_code)]
     server_name: String,
+    #[allow(dead_code)]
+    port: String,
+    #[allow(dead_code)]
+    port_overridden: bool,
 }
 
 async fn index_handler(State(state): State<Arc<AppState>>) -> Html<String> {
@@ -91,6 +130,8 @@ async fn index_handler(State(state): State<Arc<AppState>>) -> Html<String> {
             enable_fog: "true".to_string(),
             background_color: "default".to_string(),
             server_name: "Ward".to_string(),
+            port: state.active_port.clone(),
+            port_overridden: state.port_overridden,
         };
         return Html(tmpl.render().unwrap());
     }
@@ -108,6 +149,19 @@ async fn index_handler(State(state): State<Arc<AppState>>) -> Html<String> {
         uptime: monitor.get_uptime(),
     };
 
+    Html(tmpl.render().unwrap())
+}
+
+async fn setup_page_handler(State(state): State<Arc<AppState>>) -> Html<String> {
+    let config = state.config_manager.read_config();
+    let tmpl = SetupTemplate {
+        theme: config.as_ref().map(|c| c.theme.clone()).unwrap_or_else(|| "light".to_string()),
+        enable_fog: config.as_ref().map(|c| c.enable_fog.clone()).unwrap_or_else(|| "true".to_string()),
+        background_color: config.as_ref().map(|c| c.background_color.clone()).unwrap_or_else(|| "default".to_string()),
+        server_name: config.as_ref().map(|c| c.server_name.clone()).unwrap_or_else(|| "Ward".to_string()),
+        port: state.active_port.clone(),
+        port_overridden: state.port_overridden,
+    };
     Html(tmpl.render().unwrap())
 }
 
@@ -133,7 +187,7 @@ async fn setup_handler(
     if state.config_manager.is_configured() {
         return Json(ResponseDto { message: "Application already configured".to_string() });
     }
-    
+
     match state.config_manager.write_config(&payload) {
         Ok(_) => Json(ResponseDto { message: "Settings saved correctly".to_string() }),
         Err(e) => Json(ResponseDto { message: format!("Failed to save settings: {}", e) }),

@@ -11,7 +11,23 @@ Welcome to the new Rust-based Ward server! This rewrite maintains 100% feature p
 
 ## How to Migrate
 
-If you are an existing user using Docker or running the binary directly, the transition is seamless.
+If you are an existing user using Docker or running the binary directly, the transition is seamless with a few minor improvements to how ports are configured.
+
+### Port Configuration (New)
+
+The port configuration has been decoupled from the `setup.ini` and environment variables to allow for cleaner runtime management via command-line arguments. 
+
+You can now specify the port directly when launching the binary. If you omit the flag, it defaults to `4000`.
+
+```bash
+# Start Ward on the default port (4000)
+./ward
+
+# Start Ward on a custom port (e.g. 8080)
+./ward --port 8080
+./ward -p 8080
+```
+*Note: The port must be a valid number between 1024 and 65535. The server will reject invalid values with a helpful error message.*
 
 ### 1. Docker Users
 
