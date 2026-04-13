@@ -1,0 +1,51 @@
+/*
+    Fonts file
+    Used for define fonts of project
+
+    Every category must follow convention:
+    * Category must begins with "font" word
+    * Further should be followed by font property name
+
+    Every entry must follow convention:
+    * Must begins with category name
+    * Further should be followed by size/weight/family/etc.
+
+    By example: --font-weight-regular
+*/
+
+:root
+{
+    /* font-family */
+    --font-family-roboto: roboto;
+
+    /* font-size */
+    --font-size-9pt: 0.563em;
+    --font-size-10pt: 0.625em;
+    --font-size-11pt: 0.688em;
+    --font-size-12pt: 0.750em;
+    --font-size-13pt: 0.813em;
+    --font-size-14pt: 0.875em;
+    --font-size-18pt: 1.125em;
+    --font-size-21pt: 1.313em;
+    --font-size-31pt: 1.938em;
+    --font-size-42pt: 2.625em;
+    --font-size-62pt: 3.875em;
+
+    /* font-weight */
+    --font-weight-regular: 400;
+    --font-weight-bold: 700;
+}
+
+@font-face
+{
+    font-family: roboto;
+    font-weight: 400;
+    src: url(/fonts/roboto/regular.woff2) format('woff2');
+}
+
+@font-face
+{
+    font-family: roboto;
+    font-weight: 700;
+    src: url(/fonts/roboto/bold.woff2) format('woff2');
+}

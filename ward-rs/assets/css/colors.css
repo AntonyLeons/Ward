@@ -1,0 +1,52 @@
+/*
+    Colors file
+    Used for define colors of project
+
+    Every category must follow convention:
+    * Category must contain only color name
+
+    Every entry must follow convention:
+    * Must begins with category name
+    * Further should be followed by tint/opacity/etc.
+
+    By example: --grey-light
+*/
+
+:root
+{
+    /* white */
+    --white: rgba(255, 255, 255, 1);
+    --white-opacity-40: rgba(255, 255, 255, 0.4);
+    --white-opacity-70: rgba(255, 255, 255, 0.7);
+    --white-opacity-90: rgba(255, 255, 255, 0.9);
+
+    /* black */
+    --black: rgba(0, 0, 0, 1);
+    --black-opacity-10: rgba(0, 0, 0, 0.1);
+
+    /* grey */
+    --grey-light: rgba(188, 188, 188, 1);
+    --grey: rgba(121, 121, 121, 1);
+    --grey-opacity-90: rgba(121, 121, 121, 0.9);
+    --grey-opacity-70: rgba(121, 121, 121, 0.7);
+    --grey-dimmed: rgba(90, 90, 90, 1);
+    --grey-dark: rgba(60, 60, 60, 1);
+
+    /* blue */
+    --blue-light: rgba(121, 131, 247, 1);
+    --blue-form: rgba(230, 232, 254, 1);
+    --blue: rgba(89, 101, 249, 1);
+
+    /* red */
+    --red-light: rgba(255, 117, 117, 1);
+    --red-form: rgba(249, 226, 226, 1);
+    --red: rgba(255, 89, 89, 1);
+
+    /* green */
+    --green-light: rgba(70, 191, 157, 1);
+    --green-form: rgba(212, 242, 225, 1);
+    --green: rgba(8, 193, 141, 1);
+
+    /* purple */
+    --purple-light: rgba(228, 227, 239, 1);
+}

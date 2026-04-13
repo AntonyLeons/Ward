@@ -1,0 +1,176 @@
+/*
+    Animations file
+    Used for define animations of project
+
+    Every category must follow convention:
+    * Category must begins with "animation" word
+    * Further should be followed by animation property name
+
+    Every entry must follow convention:
+    * Must begins with category name
+    * Further should be followed by tag/class/id/animation name/etc.
+
+    By example: --animation-duration-wiggle
+*/
+
+:root
+{
+    /* animation-duration */
+    --animation-duration-fade-in-setup-div: 0.4s;
+    --animation-duration-fade-in-square: 0.5s;
+    --animation-duration-wiggle-usage-value: 0.6s;
+    --animation-duration-fade-in-triangle: 0.5s;
+    --animation-duration-fade-in-error-div: 0.8s;
+
+    /* animation-delay */
+    --animation-delay-chart-triangle-grid-div: 1s;
+    --animation-delay-usage-value-first: 0.2s;
+    --animation-delay-usage-value-second: 0.4s;
+    --animation-delay-usage-value-third: 0.6s;
+}
+
+@keyframes fade-in-setup-div
+{
+    0%
+    {
+        opacity: 0;
+    }
+    100%
+    {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in-square
+{
+    0%
+    {
+        top: 0.000rem;
+        opacity: 0;
+    }
+    100%
+    {
+        top: 0.563rem;
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out-square
+{
+    0%
+    {
+        top: 0.563rem;
+        opacity: 1;
+    }
+    100%
+    {
+        top: 0.000rem;
+        opacity: 0;
+    }
+}
+
+@keyframes wiggle-usage-value
+{
+    0%
+    {
+        top: 0.000rem;
+    }
+    50%
+    {
+        top: -2rem;
+    }
+    100%
+    {
+        top: 0.000rem;
+    }
+}
+
+@keyframes fade-in-cloud-left
+{
+    0%
+    {
+        left: -5.000rem;
+    }
+    100%
+    {
+        left: 0.000rem;
+    }
+}
+
+@keyframes fade-out-cloud-left
+{
+    0%
+    {
+        left: 0.000rem;
+    }
+    100%
+    {
+        left: -5.000rem;
+    }
+}
+
+@keyframes fade-in-cloud-right
+{
+    0%
+    {
+        left: 17.875rem;
+    }
+    100%
+    {
+        left: 12.875rem;
+    }
+}
+
+@keyframes fade-out-cloud-right
+{
+    0%
+    {
+        left: 12.875rem;
+    }
+    100%
+    {
+        left: 17.875rem;
+    }
+}
+
+@keyframes fade-in-triangle
+{
+    0%
+    {
+        top: 0.000rem;
+        opacity: 0;
+    }
+    100%
+    {
+        top: 0.563rem;
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out-triangle
+{
+    0%
+    {
+        top: 0.563rem;
+        opacity: 1;
+    }
+    100%
+    {
+        top: 0.000rem;
+        opacity: 0;
+    }
+}
+
+@keyframes fade-in-error-div
+{
+    0%
+    {
+        bottom: 3.125rem;
+        opacity: 0;
+    }
+    100%
+    {
+        bottom: 7.500rem;
+        opacity: 1;
+    }
+}

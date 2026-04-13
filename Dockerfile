@@ -19,6 +19,7 @@ EXPOSE 4000
 
 # Set production profile
 ENV SPRING_PROFILES_ACTIVE=prod
+ENV JAVA_TOOL_OPTIONS="--enable-native-access=ALL-UNNAMED -Xms32m -Xmx256m -XX:+UseSerialGC"
 
 # Run the JAR file as sudo user on entry point
 ENTRYPOINT ["java", "-jar", "ward.jar"]

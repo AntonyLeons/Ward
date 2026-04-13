@@ -1,0 +1,29 @@
+name: Rust Build and Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Rust
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        components: rustfmt, clippy
+    - name: Format Check
+      run: cargo fmt --manifest-path ward-rs/Cargo.toml -- --check
+    - name: Clippy Check
+      run: cargo clippy --manifest-path ward-rs/Cargo.toml -- -D warnings
+    - name: Build
+      run: cargo build --manifest-path ward-rs/Cargo.toml --release
+    - name: Run Tests
+      run: cargo test --manifest-path ward-rs/Cargo.toml

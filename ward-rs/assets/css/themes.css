@@ -1,0 +1,164 @@
+/*
+    Themes file
+    Used for define themes of project
+
+    Every category must follow convention:
+    * Category must contain only theme name
+
+    Every subcategory must follow convention:
+    * Subcategory must contain only css property name
+
+    Every entry must follow convention:
+    * Must begins with subcategory name
+    * Further should be followed by tag/class/id/etc.
+
+    By example: --color-body
+*/
+
+/* light */
+html[theme = "light"]
+{
+    /* color */
+    --color-logo: var(--white);
+    --color-logo-description: var(--white);
+    --color-label-main-settings: var(--grey);
+    --color-main-settings-input: var(--grey);
+    --color-main-settings-input-placeholder: var(--grey);
+    --color-label-additional-settings: var(--grey);
+    --color-theme-buttons-input: var(--grey);
+    --color-port: var(--grey);
+    --color-port-placeholder: var(--grey-light);
+    --color-submit: var(--white);
+    --color-hw-type: var(--black);
+    --color-hw-name: var(--grey);
+    --color-usage-value-span: var(--grey-light);
+    --color-usage-postfix: var(--black);
+    --color-info-label: var(--grey-light);
+    --color-detailed-hw-info-div: var(--white);
+    --color-announcement: var(--white);
+    --color-uptime-dashboard-logo: var(--grey-light);
+    --color-uptime-dashboard-logo-description: var(--grey-light);
+    --color-values-grid-div: var(--grey);
+    --color-labels-grid-div: var(--grey-light);
+    --color-chart-label: var(--black);
+    --color-project-version: var(--grey);
+    --color-code: var(--black);
+    --color-title: var(--black);
+    --color-explanation-div: var(--grey);
+    --color-advice: var(--grey-light);
+
+    /* background */
+    --background-body: var(--purple-light);
+    --background-form: var(--linear-gradient-form-light);
+    --background-form-squares-grid-first: var(--blue-light);
+    --background-form-squares-grid-second: var(--red-light);
+    --background-form-squares-grid-third: var(--green-light);
+    --background-main-settings: var(--white);
+    --background-main-settings-input: var(--white);
+    --background-main-settings-select: var(--white);
+    --background-main-settings-underline: var(--blue-light);
+    --background-button-squares-grid-first: var(--purple-light);
+    --background-button-squares-grid-second: var(--grey-light);
+    --background-theme-buttons-first: var(--purple-light);
+    --background-theme-buttons-second: var(--grey-light);
+    --background-background-settings-color-selector: var(--grey-light);
+    --background-port: var(--white);
+    --background-submit: var(--green-light);
+    --background-card: var(--white);
+    --background-hw-logo-first: var(--blue-light);
+    --background-hw-logo-second: var(--red-light);
+    --background-hw-logo-third: var(--green-light);
+    --background-usage-underline-first: var(--blue-light);
+    --background-usage-underline-second: var(--red-light);
+    --background-usage-underline-third: var(--green-light);
+    --background-footer-first: var(--blue-light);
+    --background-footer-second: var(--red-light);
+    --background-footer-third: var(--green-light);
+    --background-dividers-div: var(--white);
+    --background-uptime: var(--linear-gradient-uptime-light);
+    --background-values-grid-div: var(--white-opacity-70);
+    --background-labels-grid-div: var(--white-opacity-90);
+    --background-chart-rectangle-grid-first: var(--blue-light);
+    --background-chart-rectangle-grid-second: var(--red-light);
+    --background-chart-rectangle-grid-third: var(--green-light);
+    --background-error-div: var(--white);
+
+    /* border-color */
+    --border-color-chart-triangle-grid-first: var(--blue);
+    --border-color-chart-triangle-grid-second: var(--red);
+    --border-color-chart-triangle-grid-third: var(--green);
+}
+
+/* dark */
+html[theme = "dark"]
+{
+    /* color */
+    --color-logo: var(--white);
+    --color-logo-description: var(--white);
+    --color-label-main-settings: var(--white);
+    --color-main-settings-input: var(--white);
+    --color-main-settings-input-placeholder: var(--grey-light);
+    --color-label-additional-settings: var(--white);
+    --color-theme-buttons-input: var(--grey);
+    --color-port: var(--white);
+    --color-port-placeholder: var(--grey-light);
+    --color-submit: var(--white);
+    --color-hw-type: var(--white);
+    --color-hw-name: var(--white);
+    --color-usage-value-span: var(--white);
+    --color-usage-postfix: var(--white);
+    --color-info-label: var(--white);
+    --color-detailed-hw-info-div: var(--white);
+    --color-announcement: var(--white);
+    --color-uptime-dashboard-logo: var(--grey-light);
+    --color-uptime-dashboard-logo-description: var(--white);
+    --color-values-grid-div: var(--white);
+    --color-labels-grid-div: var(--white);
+    --color-chart-label: var(--white);
+    --color-project-version: var(--white);
+    --color-code: var(--white);
+    --color-title: var(--white);
+    --color-explanation-div: var(--grey);
+    --color-advice: var(--grey-light);
+
+    /* background */
+    --background-body: var(--grey-light);
+    --background-form: var(--linear-gradient-form-dark);
+    --background-form-squares-grid-first: var(--grey-light);
+    --background-form-squares-grid-second: var(--grey-light);
+    --background-form-squares-grid-third: var(--grey-light);
+    --background-main-settings: var(--grey);
+    --background-main-settings-input: var(--grey);
+    --background-main-settings-select: var(--grey);
+    --background-main-settings-underline: var(--grey-light);
+    --background-button-squares-grid-first: var(--purple-light);
+    --background-button-squares-grid-second: var(--grey-light);
+    --background-theme-buttons-first: var(--purple-light);
+    --background-theme-buttons-second: var(--grey-light);
+    --background-background-settings-color-selector: var(--grey-light);
+    --background-port: var(--grey);
+    --background-submit: var(--grey-light);
+    --background-card: var(--grey-dark);
+    --background-hw-logo-first: var(--blue-light);
+    --background-hw-logo-second: var(--red-light);
+    --background-hw-logo-third: var(--green-light);
+    --background-usage-underline-first: var(--blue-light);
+    --background-usage-underline-second: var(--red-light);
+    --background-usage-underline-third: var(--green-light);
+    --background-footer-first: var(--blue);
+    --background-footer-second: var(--red);
+    --background-footer-third: var(--green);
+    --background-dividers-div: var(--grey-dark);
+    --background-uptime: var(--grey-dark);
+    --background-values-grid-div: var(--grey-opacity-70);
+    --background-labels-grid-div: var(--grey-opacity-90);
+    --background-chart-rectangle-grid-first: var(--blue-light);
+    --background-chart-rectangle-grid-second: var(--red-light);
+    --background-chart-rectangle-grid-third: var(--green-light);
+    --background-error-div: var(--grey-dark);
+
+    /* border-color */
+    --border-color-chart-triangle-grid-first: var(--blue);
+    --border-color-chart-triangle-grid-second: var(--red);
+    --border-color-chart-triangle-grid-third: var(--green);
+}
