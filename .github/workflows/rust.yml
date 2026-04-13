@@ -20,10 +20,10 @@ jobs:
       with:
         components: rustfmt, clippy
     - name: Format Check
-      run: cargo fmt --manifest-path ward-rs/Cargo.toml -- --check
+      run: cargo fmt -- --check
     - name: Clippy Check
-      run: cargo clippy --manifest-path ward-rs/Cargo.toml -- -D warnings
+      run: cargo clippy -- -D warnings
     - name: Build
-      run: cargo build --manifest-path ward-rs/Cargo.toml --release
+      run: cargo build --release
     - name: Run Tests
-      run: cargo test --manifest-path ward-rs/Cargo.toml
+      run: cargo test

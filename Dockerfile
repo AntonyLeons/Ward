@@ -1,25 +1,39 @@
-# Base image with Maven installed already
-FROM maven:3.9-eclipse-temurin-25 AS builder
+# Build stage
+FROM rust:1.88-slim-bookworm AS builder
 
-# Copy the entire project into the Docker image
-COPY . .
+# Create a new empty shell project
+WORKDIR /usr/src/ward-rs
 
-# Build project
-RUN mvn clean package
+# Copy dependencies and build them first (caching)
+COPY Cargo.toml Cargo.lock ./
+RUN mkdir src && echo "fn main() {}" > src/main.rs
+RUN cargo build --release
+RUN rm -rf src
 
-# Base image containing OpenJDK 25
-FROM eclipse-temurin:25-jre
+# Copy the actual source code and templates
+COPY src ./src
+COPY templates ./templates
+COPY assets ./assets
 
-# Copy the JAR file and pom.xml from the builder image to the working directory
-COPY --from=builder target/*.jar /ward.jar
-COPY --from=builder pom.xml /pom.xml
+# Build the final binary
+RUN cargo build --release
 
-# Expose port 4000
+# Production stage
+FROM debian:bookworm-slim
+
+WORKDIR /app
+
+# Install necessary runtime dependencies (e.g., for sysinfo or SSL if needed)
+RUN apt-get update && apt-get install -y libssl3 && rm -rf /var/lib/apt/lists/*
+
+# Copy the compiled binary
+COPY --from=builder /usr/src/ward/target/release/ward ./ward
+
+# Create empty setup.ini or ensure it can be created
+RUN touch setup.ini && chmod 666 setup.ini
+
+# Expose port
 EXPOSE 4000
 
-# Set production profile
-ENV SPRING_PROFILES_ACTIVE=prod
-ENV JAVA_TOOL_OPTIONS="--enable-native-access=ALL-UNNAMED -Xms32m -Xmx256m -XX:+UseSerialGC"
-
-# Run the JAR file as sudo user on entry point
-ENTRYPOINT ["java", "-jar", "ward.jar"]
+# Run the binary
+ENTRYPOINT ["./ward"]
