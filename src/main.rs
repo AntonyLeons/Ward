@@ -6,10 +6,12 @@ use axum::{
     routing::{get, post},
     Router, Json, extract::State, response::Html,
 };
+use axum::http::{header, StatusCode, Uri, HeaderValue};
+use axum::response::IntoResponse;
 use std::sync::Arc;
 use tokio::sync::Mutex;
 use tower_http::services::ServeDir;
-use tracing_subscriber;
+use tower_http::set_header::SetResponseHeaderLayer;
 
 use crate::system::SystemMonitor;
 use crate::config::ConfigManager;
@@ -38,11 +40,11 @@ struct Args {
 fn port_in_range(s: &str) -> Result<u16, String> {
     let port: usize = s
         .parse()
-        .map_err(|_| format!("`{}` isn't a valid port number", s))?;
+        .map_err(|_| format!("`{s}` isn't a valid port number"))?;
     if (1024..=65535).contains(&port) {
         Ok(port as u16)
     } else {
-        Err(format!("Port not in range 1024-65535 (provided {})", port))
+        Err(format!("Port not in range 1024-65535 (provided {port})"))
     }
 }
 
@@ -84,9 +86,21 @@ async fn main() {
         .nest_service("/js", ServeDir::new("assets/js"))
         .nest_service("/img", ServeDir::new("assets/img"))
         .nest_service("/fonts", ServeDir::new("assets/fonts"))
+        .layer(SetResponseHeaderLayer::overriding(
+            header::X_FRAME_OPTIONS,
+            HeaderValue::from_static("DENY"),
+        ))
+        .layer(SetResponseHeaderLayer::overriding(
+            header::X_CONTENT_TYPE_OPTIONS,
+            HeaderValue::from_static("nosniff"),
+        ))
+        .layer(SetResponseHeaderLayer::overriding(
+            header::X_XSS_PROTECTION,
+            HeaderValue::from_static("1; mode=block"),
+        ))
         .with_state(app_state);
 
-    let addr = format!("0.0.0.0:{}", port);
+    let addr = format!("0.0.0.0:{port}");
     tracing::info!("Listening on {}", addr);
     let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
     axum::serve(listener, app).await.unwrap();
@@ -152,6 +166,7 @@ async fn index_handler(State(state): State<Arc<AppState>>) -> Html<String> {
     Html(tmpl.render().unwrap())
 }
 
+    #[allow(dead_code)]
 async fn setup_page_handler(State(state): State<Arc<AppState>>) -> Html<String> {
     let config = state.config_manager.read_config();
     let tmpl = SetupTemplate {
@@ -190,7 +205,7 @@ async fn setup_handler(
 
     match state.config_manager.write_config(&payload) {
         Ok(_) => Json(ResponseDto { message: "Settings saved correctly".to_string() }),
-        Err(e) => Json(ResponseDto { message: format!("Failed to save settings: {}", e) }),
+        Err(e) => Json(ResponseDto { message: format!("Failed to save settings: {e}") }),
     }
 }
 
@@ -211,6 +226,8 @@ mod tests {
         let app_state = Arc::new(AppState {
             sys_monitor,
             config_manager,
+            active_port: "4000".to_string(),
+            port_overridden: false,
         });
 
         Router::new()

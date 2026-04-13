@@ -10,6 +10,12 @@ pub struct SystemMonitor {
     last_update: Mutex<Instant>,
 }
 
+impl Default for SystemMonitor {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SystemMonitor {
     /// Initialize a new SystemMonitor instance
     pub fn new() -> Self {
@@ -53,7 +59,7 @@ impl SystemMonitor {
         #[cfg(target_os = "windows")]
         {
             if let Ok(output) = std::process::Command::new("wmic")
-                .args(&["diskdrive", "get", "model"])
+                .args(["diskdrive", "get", "model"])
                 .output()
             {
                 let stdout = String::from_utf8_lossy(&output.stdout);
@@ -134,8 +140,8 @@ impl SystemMonitor {
         };
 
         let os_name = System::name().unwrap_or_else(|| "Unknown".to_string());
-        let os_version = System::os_version().unwrap_or_else(|| "".to_string());
-        let operating_system = format!("{} {}", os_name, os_version);
+        let os_version = System::os_version().unwrap_or_default();
+        let operating_system = format!("{os_name} {os_version}");
 
         let total_ram_bytes = sys.total_memory();
         let total_ram_formatted = format!("{} RAM", Self::get_converted_capacity(total_ram_bytes));
@@ -244,10 +250,10 @@ impl SystemMonitor {
         let seconds = uptime_secs % 60;
 
         UptimeDto {
-            days: format!("{:02}", days),
-            hours: format!("{:02}", hours),
-            minutes: format!("{:02}", minutes),
-            seconds: format!("{:02}", seconds),
+            days: format!("{days:02}"),
+            hours: format!("{hours:02}"),
+            minutes: format!("{minutes:02}"),
+            seconds: format!("{seconds:02}"),
         }
     }
 }

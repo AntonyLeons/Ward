@@ -26,6 +26,10 @@ WORKDIR /app
 # Install necessary runtime dependencies (e.g., for sysinfo or SSL if needed)
 RUN apt-get update && apt-get install -y libssl3 && rm -rf /var/lib/apt/lists/*
 
+# Run as a non-root user for better security
+RUN useradd -m -s /bin/bash ward_user && chown -R ward_user /app
+USER ward_user
+
 # Copy the compiled binary
 COPY --from=builder /usr/src/ward/target/release/ward ./ward
 
