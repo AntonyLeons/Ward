@@ -116,6 +116,8 @@ public class Ward extends SpringBootServletInitializer {
                         "Application Ward is running! Access URLs:\n\t" +
                         "Local: \t\t{}://{}:{}\n\t" +
                         "Network: \t{}://{}:{}\n" +
+                        "\tward-rs is out — try it for 16× less RAM usage, instant startup, and 6× smaller filesize:\n\t" +
+                        "https://github.com/AntonyLeons/ward-rs\n" +
                         "----------------------------------------------------------",
                 protocol, localAddress, port,
                 protocol, networkAddress, port);

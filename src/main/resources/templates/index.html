@@ -188,7 +188,12 @@
                         </div>
                         <script type = "text/javascript" th:inline = "javascript"> chartInitialization(); </script>
                     </div>
-                    <div id = "project-version" class = "text-center" th:text = "|${serverName}    ${version}|"></div>
+                    <div id = "project-version" class = "text-center">
+                        <span th:text = "${serverName}"></span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span th:text = "${version}"></span>
+                        <span class = "legacy-tooltip" data-tooltip = "Java version is now legacy, use ward-rs" tabindex = "0">i</span>
+                    </div>
                 </div>
             </div>
         </div>

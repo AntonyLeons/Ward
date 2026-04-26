@@ -10,6 +10,12 @@
 
 ## [Demo](https://status.leons.dev)
 
+## ward-rs
+
+ward-rs is out — try it for 16× less RAM usage, instant startup, and 6× smaller filesize:
+
+- https://github.com/AntonyLeons/ward-rs
+
 # Quick start
 
 ## Docker
